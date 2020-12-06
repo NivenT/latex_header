@@ -75,6 +75,7 @@
 \newcommand{\vVec}[3]{\begin{pmatrix}#1\\#2\\#3\end{pmatrix}}
 \newcommand{\mat}[4]{\begin{pmatrix}#1&#2\\ #3&#4\end{pmatrix}}
 \newcommand{\Mat}[9]{\begin{pmatrix}#1&#2&#3\\#4&#5&#6\\#7&#8&#9\end{pmatrix}}
+\newcommand{\Matt}[9]{\begin{pmatrix}#1&#4&#7\\#2&#5&#8\\#3&#6&#9\end{pmatrix}} %matrix transpose
 \newcommand{\Wedge}{\bigwedge\nolimits}
 \newcommand{\topwedge}{\Wedge^{\mrm{top}}}
 \newcommand{\Span}[1]{\spn\left\{#1\right\}}
@@ -122,12 +123,16 @@
 }
 \newcommand{\ab}[1]{#1^{\mathrm{ab}}}
 \newcommand{\un}[1]{#1^{\mrm{un}}}
+\newcommand{\ur}[1]{#1^{\mrm{ur}}}
+\newcommand{\tors}[1]{#1_{\mrm{tors}}}
 \newcommand{\normal}{\triangleleft}
 \DeclareMathOperator{\image}{image}
 \DeclareMathOperator{\Hom}{Hom}	
 \DeclareMathOperator{\Sur}{Sur}
 \DeclareMathOperator{\Inj}{Inj}
 \DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Out}{Out}
 \DeclareMathOperator{\sHom}{\mathcal{H\mkern-7mu}\textit{om}}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Tor}{Tor}
@@ -183,6 +188,13 @@
 \newcommand{\compl}[1]{#1^{\wedge}} % Completion
 \newcommand{\al}[1]{#1^{\mrm{al}}}
 \newcommand{\rad}{\mrm{rad}} % radical
+\newcommand{\fieldtower}[6]{
+    \begin{tikzcd}[ampersand replacement=\&]
+	    {#1}\ar[d, dash, "{#5}" right]\ar[dd, dash, bend right, "{#4}" left]\\
+	    {#2}\ar[d, dash, "{#6}" right]\\
+	    {#3}
+	\end{tikzcd}
+}
 \DeclareMathOperator{\Disc}{Disc}
 \DeclareMathOperator{\norm}{N}
 \DeclareMathOperator{\Aut}{Aut}
@@ -193,6 +205,8 @@
 \DeclareMathOperator{\Nm}{Nm}
 \DeclareMathOperator{\zdisc}{disc_{\mathbb Z}}
 \DeclareMathOperator{\ktrace}{\trace_{K/\mathbb Q}}
+\DeclareMathOperator{\Inv}{Inv}
+\DeclareMathOperator{\Br}{Br}
 \DeclareMathOperator{\Char}{char}
 \DeclareMathOperator{\denom}{denom}
 \DeclareMathOperator{\Frac}{Frac}
@@ -203,7 +217,7 @@
 \DeclareMathOperator{\Pic}{Pic}
 \DeclareMathOperator{\atensor}{\otimes_A}
 \DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\Frob}{Frob}
+\newcommand{\Frob}{\mrm{Frob}}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
 \renewcommand{\split}{\textrm{split}}
@@ -218,8 +232,8 @@
 \DeclareMathSymbol{\Sha}{\mathord}{mcy}{"58} 
 
 %% Modular Forms/Curves
-\newcommand{\sump}{\sideset{}'\sum}
-\newcommand{\sums}{\sideset{}*\sum}
+\newcommand{\sump}{\sideset{}'\sum} % sum prime
+\newcommand{\sums}{\sideset{}*\sum} % sum star
 \newcommand{\prodp}{\sideset{}'\prod}
 \newcommand{\slz}{\SL_2(\Z)}
 \newcommand{\glp}{\GL_2^+}
@@ -274,6 +288,7 @@
 \newcommand{\pderivf}[2]{\partial #1/\partial #2}
 \newcommand{\pderivd}[1]{\pderiv{}{#1}}
 \newcommand{\pderivdf}[1]{\pderivf{}{#1}}
+\newcommand{\pderivat}[2]{\left.\pderivd{#1}\right|_{#1=#2}}
 \newcommand{\Pderiv}[3]{\frac{\partial #1}{\partial #2\partial #3}}
 \newcommand{\dtwo}[1]{\pderiv{#1}x\,dx + \pderiv{#1}y\,dy}
 \newcommand{\dthree}[1]{\dtwo{#1} + \pderiv{#1}z\,dz}
@@ -313,6 +328,8 @@
 \DeclareMathOperator{\fiber}{fiber}
 \DeclareMathOperator{\hofiber}{hofiber}
 \DeclareMathOperator{\Bun}{Bun}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\sk}{sk}
 
 %% Category Theory
 \newcommand{\gr}{\mrm{gr}}
@@ -331,6 +348,7 @@
 \newcommand{\dg}{\d g}
 \newcommand{\rs}[1]{#1^{\mrm{rs}}}
 \newcommand{\der}[1]{#1^{\mrm{der}}}
+\newcommand{\reg}[1]{#1^{\mrm{reg}}}
 \newcommand{\GL}{\mrm{GL}}
 \newcommand{\Spin}{\mrm{Spin}}
 \newcommand{\Sp}{\mrm{Sp}}
@@ -344,6 +362,7 @@
 \DeclareMathOperator{\Lie}{Lie}
 \DeclareMathOperator{\ad}{ad}
 \DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\FL}{FL}
 
 %% Complex/Algebraic Geometry + Sheaf Theory
 \newcommand{\msEX}[1]{\msE_X^{(#1)}}
@@ -351,11 +370,15 @@
 \newcommand{\cs}[1]{\parens{\ints{#1},\abs{#1}}} % Complex space
 \newcommand{\derpush}[2]{{#2}_{*#1}}
 \newcommand{\smp}[1]{{#1}^{\mrm{sm}}} % smooth points
+\newcommand{\an}[1]{{#1}^{\mrm{an}}}
 \renewcommand{\sharp}[1]{{#1}^\#}
 \newcommand{\Jac}{\mrm{Jac}}
 \newcommand{\Gr}{\mrm{Gr}}
 \newcommand{\ind}{\mrm{ind}}
-\newcommand{\etH}{\mrm H_{\'et}}
+\newcommand{\et}[1]{#1_{\text{\'et}}}
+\newcommand{\etH}{\mrm H_{\text{\'et}}}
+\newcommand{\ethom}{\mrm H_{\text{\'et}}}
+\newcommand{\etpi}{\pi^{\text{\'et}}}
 \DeclareMathOperator{\height}{ht}
 \DeclareMathOperator{\Spec}{\mbf{Spec}}
 \DeclareMathOperator{\spec}{spec}
@@ -465,7 +488,7 @@
 \newcommand{\liftsquare}[9]{
 	\begin{tikzcd}[ampersand replacement=\&]
 	{#1}\ar[r, "#2"]\ar[d, "#4" left]\&{#3}\ar[d, "#5" right]\\
-	{#6}\ar[r, "#7" above]\ar[ur, dashed, "#9" above]\&{#8}
+	{#6}\ar[r, "#7" above]\ar[ur, dashed, "#9" sloped]\&{#8}
 	\end{tikzcd}
 }
 
@@ -478,6 +501,7 @@
 \newcommand{\mfn}{\mathfrak n}
 \newcommand{\mfX}{\mathfrak X}
 \newcommand{\mfg}{\mathfrak g}
+\newcommand{\mfk}{\mathfrak k}
 \newcommand{\mfh}{\mathfrak h}
 \newcommand{\mfz}{\mathfrak z}
 \newcommand{\mfH}{\mathfrak H}
@@ -489,6 +513,7 @@
 \newcommand{\mfsl}{\mathfrak{sl}}
 \newcommand{\mfso}{\mathfrak{so}}
 \newcommand{\mfsu}{\mathfrak{su}}
+\newcommand{\mfsp}{\mathfrak{sp}}
 \newcommand{\mfo}{\mathfrak o}
 \newcommand{\mfu}{\mathfrak u}
 \newcommand{\mfU}{\mathfrak U}
@@ -533,6 +558,7 @@
 \newcommand{\mcW}{\mc W}
 \newcommand{\mcF}{\mc F}
 \newcommand{\mcE}{\mc E}
+\newcommand{\mcJ}{\mc J}
 \newcommand{\mcX}{\mc X}
 \newcommand{\mcY}{\mc Y}
 \newcommand{\mcZ}{\mc Z}
@@ -562,6 +588,7 @@
 \newcommand{\G}{\mathbb G}
 \newcommand{\K}{\mathbb K}
 \renewcommand{\H}{\mathbb H}
+\newcommand{\I}{\mathbb I}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\vphi}{\varphi}
 \renewcommand{\tau}{\uptau}
@@ -611,10 +638,24 @@
 		\hfill#3\hfill&\text{otherwise}
 	\end{cases}
 }
+\newcommand{\threecases}[5]{
+	\begin{cases}
+		\hfill#1\hfill&\text{if }#2\\
+		\hfill#3\hfill&\text{if }#4\\
+		\hfill#5\hfill&\text{otherwise}
+	\end{cases}
+}
 \newcommand{\Twocases}[4]{
 	\begin{cases}
 		\hfill#1\hfill&\text{if }#2\\
 		\hfill#3\hfill&\text{if }#4
+	\end{cases}
+}
+\newcommand{\Threecases}[6]{
+	\begin{cases}
+		\hfill#1\hfill&\text{if }#2\\
+		\hfill#3\hfill&\text{if }#4\\
+		\hfill#5\hfill&\text{if }#6
 	\end{cases}
 }
 \newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
@@ -631,6 +672,8 @@
 \newcommand{\iso}{\xto\sim}
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\bij}{\leftrightarrow}
+\newcommand{\biij}{\longleftrightarrow}
 \newcommand{\dashto}{\dashrightarrow}
 \newcommand{\mapdesc}[5]{
 	\begin{matrix}
@@ -653,6 +696,9 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Id}{Id}
 \DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator*{\argmin}{\arg\min}
+\DeclareMathOperator*{\argmax}{\arg\max}
+
 
 %% Text
 \newcommand{\xxsspacing}[0]{\hspace*{3pt}}
@@ -672,7 +718,7 @@
 \newcommand{\tfor}{\,\text{ for }\,}
 \newcommand{\tso}{\,\text{ so }\,}
 \newcommand{\tbut}{\,\text{ but }\,}
-\newcommand{\tcomma}{\text{, }\,}
+\newcommand{\tcomma}{\text{, }\,\,}
 \newcommand{\tthen}{\,\text{ then }\,}
 \newcommand{\tvia}{\,\text{ via }\,}
 \newcommand{\tforall}{\,\text{ for all }\,}

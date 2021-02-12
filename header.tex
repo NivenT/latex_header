@@ -18,15 +18,27 @@
 \usepackage{mdframed}
 \usepackage{pgfplots}
 \usepackage{manfnt}
-\usepackage{calrsfs}
+%\usepackage{calrsfs}
 \usepackage[new]{old-arrows}
 \usepackage{changepage}
 \usepackage{stmaryrd}
 \usepackage{appendix}
+\usepackage[normalem]{ulem}
 
 % https://tex.stackexchange.com/questions/69085/two-different-calligraphic-font-styles-in-math-mode
 % calrsfs messes with mathcal. This makes pazocal what mathcal usually is
-\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+%\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+
+% Euler Script font
+% https://ctan.org/pkg/euler?lang=en
+\DeclareMathAlphabet{\matheuler}{U}{eus}{m}{n}
+
+%% lists
+%\setlist[itemize]{align=left} % only looks good when bullets replaced by long labels
+\setlist[enumerate]{align=right}
+\setlist[enumerate,1]{label=\llap{\bfseries{(\arabic*)}}}
+\setlist[enumerate,2]{label=\llap{\bfseries{(\arabic{enumi}.\arabic*)}}}
+\setlist[enumerate,3]{label=\llap{\bfseries{(\arabic{enumi}.\arabic{enumii}.\roman*)}}}
 
 \pgfplotsset{width=7cm,compat=1.9}
 
@@ -74,6 +86,7 @@
 \newcommand{\vvec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
 \newcommand{\vVec}[3]{\begin{pmatrix}#1\\#2\\#3\end{pmatrix}}
 \newcommand{\mat}[4]{\begin{pmatrix}#1&#2\\ #3&#4\end{pmatrix}}
+\newcommand{\matt}[4]{\mat{#1}{#3}{#2}{#4}}
 \newcommand{\Mat}[9]{\begin{pmatrix}#1&#2&#3\\#4&#5&#6\\#7&#8&#9\end{pmatrix}}
 \newcommand{\Matt}[9]{\begin{pmatrix}#1&#4&#7\\#2&#5&#8\\#3&#6&#9\end{pmatrix}} %matrix transpose
 \newcommand{\Wedge}{\bigwedge\nolimits}
@@ -101,6 +114,9 @@
 \newcommand{\odd}[1]{#1^{\mrm{odd}}}
 \newcommand{\invlim}{\varprojlim\limits}
 \newcommand{\dirlim}{\varinjlim\limits}
+\newcommand{\colim}{\mrm{colim}}
+\newcommand{\holim}{\mrm{holim}}
+\newcommand{\hocolim}{\mrm{hocolim}}
 \newcommand{\ses}[5]{
 	\begin{tikzcd}[ampersand replacement=\&]
 		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
@@ -126,6 +142,7 @@
 \newcommand{\ur}[1]{#1^{\mrm{ur}}}
 \newcommand{\tors}[1]{#1_{\mrm{tors}}}
 \newcommand{\normal}{\triangleleft}
+\newcommand{\irr}[1]{#1^{\mrm{irr}}} 
 \DeclareMathOperator{\image}{image}
 \DeclareMathOperator{\Hom}{Hom}	
 \DeclareMathOperator{\Sur}{Sur}
@@ -133,7 +150,7 @@
 \DeclareMathOperator{\Isom}{Isom}
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\Out}{Out}
-\DeclareMathOperator{\sHom}{\mathcal{H\mkern-7mu}\textit{om}}
+\DeclareMathOperator{\sHom}{\mathscr{H\mkern-7mu}\textit{om}}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\dertimes}{\overset L\otimes}
@@ -218,6 +235,7 @@
 \DeclareMathOperator{\atensor}{\otimes_A}
 \DeclareMathOperator{\ord}{ord}
 \newcommand{\Frob}{\mrm{Frob}}
+\DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
 \renewcommand{\split}{\textrm{split}}
@@ -230,6 +248,9 @@
 \DeclareFontShape{U}{wncy}{m}{n}{<->wncyr10}{}
 \DeclareSymbolFont{mcy}{U}{wncy}{m}{n}
 \DeclareMathSymbol{\Sha}{\mathord}{mcy}{"58} 
+% End Sha stuff
+\DeclareMathOperator{\Art}{Art}
+\DeclareMathOperator{\Spl}{Spl}
 
 %% Modular Forms/Curves
 \newcommand{\sump}{\sideset{}'\sum} % sum prime
@@ -275,7 +296,9 @@
 \newcommand{\closure}[1]{\bar{#1}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\interior}[1]{\mathring{#1}}
-\newcommand{\open}{\overset{\text{open}}\subset}
+%\newcommand{\open}{\overset{\text{open}}\subset} % "I care about backwards compatibility," he said. smh
+\newcommand{\openset}{\overset{\text{open}}\subset}
+\newcommand{\closedset}{\overset{\text{closed}}\subset}
 \newcommand{\cp}[1]{\overline{\{#1\}}} % closure of point
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\Reg}{Reg}
@@ -310,17 +333,20 @@
 \newcommand{\da}[0]{\d a}
 \newcommand{\db}[0]{\d b}
 \newcommand{\dc}[0]{\d c}
+\renewcommand{\dh}{\d h}
 \renewcommand{\d}{\mathrm d} % This had a \, in the front before. Will I regret removing it?
 \DeclareMathOperator{\Tube}{Tube}
 \DeclareMathOperator{\dvol}{dvol}
 \DeclareMathOperator{\Todd}{Todd}
 \DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Diff}{Diff}
 
 %% Algebraic Topology
 \newcommand{\rel}[1]{\sqbracks{#1}_{\mrm{rel}}} % Relative fundamental class
 \DeclareMathOperator{\mog}{mog}
 \DeclareMathOperator{\Sq}{Sq}
 \DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Td}{Td}
 \DeclareMathOperator{\simhom}{\hom^\Delta}
 \DeclareMathOperator{\redhom}{\wt\hom}
 \DeclareMathOperator{\RP}{\mathbb R\mathbb P}
@@ -338,11 +364,23 @@
 \newcommand{\CW}{\mrm{CW}}
 \newcommand{\Ho}{\mrm{Ho}}
 \newcommand{\Set}{\mrm{Set}}
+\newcommand{\FinSet}{\mrm{FinSet}}
+\newcommand{\Fin}{\mrm{Fin}}
 \newcommand{\Top}{\mrm{Top}}
 \newcommand{\VB}{\mrm{VB}}
 \newcommand{\Ban}{\mrm{Ban}} % Banach
 \newcommand{\Rep}{\mrm{Rep}}
 \newcommand{\SW}{\mrm{SW}}
+\newcommand{\Pre}{\mrm{Pre}}
+\newcommand{\MOR}{\mrm{MOR}}
+\newcommand{\Groupoid}{\mrm{Groupoid}}
+\newcommand{\Grp}{\mrm{Grp}}
+\newcommand{\Grpoid}{\mrm{Grpoid}}
+\newcommand{\QCoh}{\mrm{QCoh}}
+\newcommand{\Def}{\mrm{Def}} % deformations
+\newcommand{\Ch}{\mrm{Ch}} % chain complexes
+\newcommand{\CMon}{\mrm{CMon}}
+\newcommand{\PSp}{\mrm{PSp}} % pre-spectra
 
 %% Lie Theory
 \newcommand{\dg}{\d g}
@@ -375,14 +413,25 @@
 \newcommand{\Jac}{\mrm{Jac}}
 \newcommand{\Gr}{\mrm{Gr}}
 \newcommand{\ind}{\mrm{ind}}
+\newcommand{\zar}[1]{#1_{\text{zar}}}
+\newcommand{\bzar}[1]{#1_{\text{Zar}}} % Used to be called \bZar so some old files may not compile w/o small edits
+\newcommand{\tet}{\text{\'et}} % text et
 \newcommand{\et}[1]{#1_{\text{\'et}}}
+\newcommand{\bet}[1]{#1_{\text{\'Et}}} % big etale
 \newcommand{\etH}{\mrm H_{\text{\'et}}}
 \newcommand{\ethom}{\mrm H_{\text{\'et}}}
 \newcommand{\etpi}{\pi^{\text{\'et}}}
+\newcommand{\fppf}[1]{#1_{\text{fppf}}} % Note sure if this (and \bfppf) are good inclusions
+\newcommand{\bfppf}[1]{#1_{\text{Fppf}}}
+\newcommand{\Hur}{\mrm{Hur}}
+\newcommand{\Hilb}{\mrm{Hilb}}
+\newcommand{\Quot}{\mrm{Quot}}
+\newcommand{\bdel}{\bar\del}
 \DeclareMathOperator{\height}{ht}
 \DeclareMathOperator{\Spec}{\mbf{Spec}}
 \DeclareMathOperator{\spec}{spec}
 \DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\rProj}{\mbf{Proj}} % relative Proj
 \DeclareMathOperator{\PAb}{PAb}
 \DeclareMathOperator{\Ab}{Ab}
 \DeclareMathOperator{\pker}{pker}
@@ -391,7 +440,6 @@
 \DeclareMathOperator{\Et}{Et}
 \DeclareMathOperator{\Div}{Div}
 \DeclareMathOperator{\res}{res}
-\DeclareMathOperator{\bdel}{\bar\del}
 \DeclareMathOperator{\cechhom}{\check{H}}
 \DeclareMathOperator{\chom}{\cechhom}
 \DeclareMathOperator{\kod}{kod}
@@ -400,6 +448,7 @@
 \DeclareMathOperator{\NS}{NS}
 \DeclareMathOperator{\Ht}{ht}
 \DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\AffSch}{AffSch}
 \DeclareMathOperator{\Sch}{Sch}
 \DeclareMathOperator{\Bl}{Bl}
 \DeclareMathOperator{\Sm}{Sm}
@@ -412,6 +461,7 @@
 %% Analysis
 \newcommand{\meas}{m_{\star}}
 \newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\invabs}[1]{\inv{\abs{#1}}}
 \newcommand{\dabs}[1]{\left\|#1\right\|}
 \let\templim\lim
 \renewcommand{\lim}{\templim\limits}
@@ -481,8 +531,8 @@
 %% Diagrams
 \newcommand{\commsquare}[8]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r, "#2"]\ar[d, "#4" left]\&{#3}\ar[d, "#5" right]\\
-	{#6}\ar[r, "#7" above]\&{#8}
+	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
+	{#6}\ar[r, "{#7}" above]\&{#8}
 	\end{tikzcd}
 }
 \newcommand{\pullback}[6]{\commsquare{#1}{}{#2}{}{#3}{#4}{#5}{#6}}
@@ -490,9 +540,34 @@
 \newcommand{\barecommsquare}[4]{\commsquare{#1}{}{#2}{}{}{#3}{}{#4}}
 \newcommand{\liftsquare}[9]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r, "#2"]\ar[d, "#4" left]\&{#3}\ar[d, "#5" right]\\
-	{#6}\ar[r, "#7" above]\ar[ur, dashed, "#9" sloped]\&{#8}
+	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
+	{#6}\ar[r, "{#7}" above]\ar[ur, dashed, "{#9}" sloped]\&{#8}
 	\end{tikzcd}
+}
+\newcommand{\twocommsquare}[9]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        {#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
+        {#6}\ar[r, "{#7}" above]\&{#8}
+        \ar[Rightarrow, from=u, to=l, "{#9}"', shorten >= 10pt, shorten <= 10pt]
+    \end{tikzcd}
+}
+\newcommand{\baretwocommsquare}[4]{\twocommsquare{#1}{}{#2}{}{}{#3}{}{#4}{}}
+\newcommand{\mapover}[6]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        {#1}\ar[rr, "{#2}" above]\ar[dr, "{#4}"']\&\&{#3}\ar[dl, "{#5}"]\\
+        \&{#6}
+    \end{tikzcd}
+}
+\newcommand{\compdiag}[6]{ % composition diagram
+    \begin{tikzcd}[ampersand replacement=\&]
+        {#1}\ar[r, "{#2}" below]\ar[rr, bend left, "{#6}" above]\&{#3}\ar[r, "{#4}" below]\&{#5}
+    \end{tikzcd}
+}
+\newcommand{\mapwithsect}[4]{ % map with section
+    \begin{tikzcd}[ampersand replacement=\&]
+        {#1}\ar[d, "{#2}" left]\\
+        {#3}\ar[u, bend right, "{#4}" right]
+    \end{tikzcd}
 }
 
 %% Limit type things
@@ -520,6 +595,7 @@
 \newcommand{\mfo}{\mathfrak o}
 \newcommand{\mfu}{\mathfrak u}
 \newcommand{\mfU}{\mathfrak U}
+\newcommand{\mfM}{\mathfrak M}
 \newcommand{\mbf}{\mathbf}
 \newcommand{\mbfx}{\mathbf x}
 \newcommand{\mbfy}{\mathbf y}
@@ -538,17 +614,18 @@
 \newcommand{\msCC}{\msC\msC}
 \newcommand{\msFG}{\msF\msG}
 \newcommand{\msF}{\ms F}
+\newcommand{\msG}{\ms G}
+\newcommand{\msH}{\ms H}
 \newcommand{\msL}{\ms L}
 \newcommand{\msM}{\ms M}
 \newcommand{\msN}{\ms N}
-\newcommand{\msG}{\ms G}
 \newcommand{\msV}{\ms V}
 \newcommand{\msW}{\ms W}
 \newcommand{\msX}{\ms X}
 \newcommand{\ms}{\mathscr}
 \newcommand{\mfq}{\mf q}
 \newcommand{\mfP}{\mf P}
-\newcommand{\mc}{\pazocal}
+\newcommand{\mc}{\mathcal} % Change to pazocal if you ever go back to using calrsfs for some reason
 \newcommand{\mcA}{\mc A}
 \newcommand{\mcB}{\mc B}
 \newcommand{\mcD}{\mc D}
@@ -599,6 +676,29 @@
 \DeclareMathOperator{\msE}{\ms E}
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
+\newcommand{\me}{\matheuler}
+\newcommand{\meA}{\me A}
+\newcommand{\meB}{\me B}
+\newcommand{\meC}{\me C}
+\newcommand{\meD}{\me D}
+\newcommand{\meE}{\me E}
+\newcommand{\meF}{\me F}
+\newcommand{\meG}{\me G}
+\newcommand{\meH}{\me H}
+\newcommand{\meM}{\me M}
+\newcommand{\meN}{\me N}
+\newcommand{\meP}{\me P}
+\newcommand{\meQ}{\me Q}
+\newcommand{\meR}{\me R}
+\newcommand{\meS}{\me S}
+\newcommand{\meT}{\me T}
+\newcommand{\meU}{\me U}
+\newcommand{\meV}{\me V}
+\newcommand{\meW}{\me W}
+\newcommand{\meX}{\me X}
+\newcommand{\meY}{\me Y}
+\newcommand{\meZ}{\me Z}
+
 
 %% Grouping Operators
 \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
@@ -608,7 +708,9 @@
 \newcommand{\pfrac}[2]{\parens{\frac{#1}{#2}}}
 \newcommand{\brackets}[1]{\left\{#1\right\}}
 \newcommand{\bracks}[1]{\brackets{#1}}
+\renewcommand{\b}{\bracks} % hopefully I never need a bar under accent
 \newcommand{\sqbracks}[1]{\left[#1\right]}
+\newcommand{\sq}{\sqbracks}
 \newcommand{\angles}[1]{\left\langle#1\right\rangle}
 \newcommand{\coint}[2]{\left[#1,#2\right)} % Closed, open interval
 \newcommand{\dsqbracks}[1]{\left\llbracket#1\right\rrbracket}
@@ -669,21 +771,35 @@
 \newcommand{\from}{\leftarrow}
 \newcommand{\xto}{\xrightarrow}
 \newcommand{\xfrom}{\xleftarrow}
-\newcommand{\xinto}[1]{\overset{#1}\into}
 \newcommand{\too}{\longrightarrow}
 \newcommand{\xtoo}{\xlongrightarrow}
 \newcommand{\iso}{\xto\sim}
+\newcommand{\xiso}[1]{\overset{#1}\iso}
 \newcommand{\into}{\hookrightarrow}
+\newcommand{\xinto}[1]{\overset{#1}\into}
+\newcommand{\finto}{\hookleftarrow}
+\newcommand{\xfinto}[1]{\overset{#1}\finto}
 \newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\xonto}[1]{\overset{#1}\onto}
+\newcommand{\fonto}{\twoheadleftarrow}
+\newcommand{\xfonto}[1]{\overset{#1}\fonto}
 \newcommand{\bij}{\leftrightarrow}
 \newcommand{\biij}{\longleftrightarrow}
+\newcommand{\longbig}{\biij}
 \newcommand{\dashto}{\dashrightarrow}
+\newcommand{\cofib}{\rightarrowtail}
 \newcommand{\mapdesc}[5]{
 	\begin{matrix}
 		\ifblank{#1}{}{#1:}&#2&\longrightarrow&#3\\
 		&#4&\longmapsto&#5
 	\end{matrix}
 }
+%\newcommand{\mapdesc}[5]{
+%    \begin{alignat}{3}
+%        \ifblank{#1}{}{#1:} &#2 &&\longrightarrow &&#3\\
+%        &#4 &&\longmapsto &&#5
+%    \end{alignat}
+%}
 \renewcommand{\div}{\mathrm{div}} % Might regret this one day
 \newcommand*{\cube}{\mbox{\mancube}}
 \DeclareMathOperator{\sign}{sign}
@@ -709,7 +825,7 @@
 \newcommand{\sspacing}[0]{\hspace*{25pt}}
 \newcommand{\mspacing}[0]{\hspace*{50pt}}
 \newcommand{\centered}[1]{\begin{center}#1\end{center}}
-\newcommand{\Text}[2]{\text{#2 #1 #2}}
+\newcommand{\Text}[2]{\text{#2 #1 #2}} % e.g. \Text{and}\xsspacing
 \newcommand{\tand}{\,\text{ and }\,} % text and
 \newcommand{\tor}{\,\text{ or }\,}
 \newcommand{\twhen}{\,\text{ when }\,}
@@ -726,6 +842,7 @@
 \newcommand{\tvia}{\,\text{ via }\,}
 \newcommand{\tforall}{\,\text{ for all }\,}
 \newcommand{\tforsome}{\,\text{ for some }\,}
+\newcommand{\tsince}{\,\text{ since }\,}
 
 %% Marginal Notes
 \newcommand{\confusion}[1]{\todo[color=red!70]{#1}}
@@ -751,7 +868,7 @@
 \newcommand{\Subusbsection}[1]{\newpage\subsubsection{#1}}
 
 %% Randomness
-\pgfmathdeclarerandomlist{thuses}{{Thus}{Therefore}{As such}{As we wished}{By this great fortune}{Alors}{Donc}{Following this thread}{Consequently}{Thusforth}{Rejoice}{This can only mean one thing...}}
+\pgfmathdeclarerandomlist{thuses}{{Thus}{Therefore}{As such}{As we wished}{By this great fortune}{Alors}{Donc}{Following this thread}{Consequently}{Thusforth}{Rejoice}{This can only mean one thing...}{Ergo}}
 \newcommand\Thus{\pgfmathrandomitem\z{thuses}\z}
 \pgfmathdeclarerandomlist{fibers}{{fiber}{fibre}}
 \newcommand\fibre{\pgfmathrandomitem\z{fibers}\z\,}

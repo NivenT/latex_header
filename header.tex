@@ -24,6 +24,7 @@
 \usepackage{stmaryrd}
 \usepackage{appendix}
 \usepackage[normalem]{ulem}
+\usepackage{ytableau}
 
 % https://tex.stackexchange.com/questions/69085/two-different-calligraphic-font-styles-in-math-mode
 % calrsfs messes with mathcal. This makes pazocal what mathcal usually is
@@ -343,6 +344,7 @@
 
 %% Algebraic Topology
 \newcommand{\rel}[1]{\sqbracks{#1}_{\mrm{rel}}} % Relative fundamental class
+\newcommand{\KSp}{\mrm{Ksp}}
 \DeclareMathOperator{\mog}{mog}
 \DeclareMathOperator{\Sq}{Sq}
 \DeclareMathOperator{\Th}{Th}
@@ -716,6 +718,36 @@
 \newcommand{\dsqbracks}[1]{\left\llbracket#1\right\rrbracket}
 \newcommand{\dsq}{\dsqbracks}
 
+%% Arrows
+\newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
+\newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
+\newcommand{\from}{\leftarrow}
+\newcommand{\xto}{\xrightarrow}
+\newcommand{\xfrom}{\xleftarrow}
+\newcommand{\too}{\longrightarrow}
+\newcommand{\xtoo}{\xlongrightarrow}
+\newcommand{\iso}{\xto\sim}
+\newcommand{\isoo}{\xtoo\sim}
+\newcommand{\xiso}[1]{\overset{#1}\iso}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\xinto}[1]{\overset{#1}\into}
+\newcommand{\finto}{\hookleftarrow}
+\newcommand{\xfinto}[1]{\overset{#1}\finto}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\xonto}[1]{\overset{#1}\onto}
+\newcommand{\fonto}{\twoheadleftarrow}
+\newcommand{\xfonto}[1]{\overset{#1}\fonto}
+\newcommand{\bij}{\leftrightarrow}
+\newcommand{\biij}{\longleftrightarrow}
+\newcommand{\longbij}{\biij}
+\newcommand{\dashto}{\dashrightarrow}
+\newcommand{\cofib}{\rightarrowtail}
+\newcommand{\toto}{\rightrightarrows}
+\newcommand{\xtoto}[2][]{\overset{#2}{\underset{#1}\toto}}
+\newcommand{\fromfrom}{\leftleftarrows}
+\newcommand{\tofrom}{\rightleftarrows}
+\newcommand{\fromto}{\leftrightarrows}
+
 %% Misc
 \newcommand{\Avg}[0]{\mrm{Avg}}
 \newcommand{\actson}{\curvearrowright}
@@ -763,31 +795,9 @@
 		\hfill#5\hfill&\text{if }#6
 	\end{cases}
 }
-\newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
-\newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
 \newcommand{\push}[1]{#1_*}
 \newcommand{\pull}[1]{#1^*}
 \newcommand{\by}{\times}
-\newcommand{\from}{\leftarrow}
-\newcommand{\xto}{\xrightarrow}
-\newcommand{\xfrom}{\xleftarrow}
-\newcommand{\too}{\longrightarrow}
-\newcommand{\xtoo}{\xlongrightarrow}
-\newcommand{\iso}{\xto\sim}
-\newcommand{\xiso}[1]{\overset{#1}\iso}
-\newcommand{\into}{\hookrightarrow}
-\newcommand{\xinto}[1]{\overset{#1}\into}
-\newcommand{\finto}{\hookleftarrow}
-\newcommand{\xfinto}[1]{\overset{#1}\finto}
-\newcommand{\onto}{\twoheadrightarrow}
-\newcommand{\xonto}[1]{\overset{#1}\onto}
-\newcommand{\fonto}{\twoheadleftarrow}
-\newcommand{\xfonto}[1]{\overset{#1}\fonto}
-\newcommand{\bij}{\leftrightarrow}
-\newcommand{\biij}{\longleftrightarrow}
-\newcommand{\longbig}{\biij}
-\newcommand{\dashto}{\dashrightarrow}
-\newcommand{\cofib}{\rightarrowtail}
 \newcommand{\mapdesc}[5]{
 	\begin{matrix}
 		\ifblank{#1}{}{#1:}&#2&\longrightarrow&#3\\
@@ -843,6 +853,7 @@
 \newcommand{\tforall}{\,\text{ for all }\,}
 \newcommand{\tforsome}{\,\text{ for some }\,}
 \newcommand{\tsince}{\,\text{ since }\,}
+\renewcommand\t\text % Not sure if I want to keep this
 
 %% Marginal Notes
 \newcommand{\confusion}[1]{\todo[color=red!70]{#1}}

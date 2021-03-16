@@ -1,5 +1,5 @@
 \usepackage[onehalfspacing]{setspace}
-\usepackage[margin=1.1in]{geometry} % margin used to be 0.6in
+\usepackage[margin=0.6in]{geometry}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -103,7 +103,7 @@
 
 %% Abstract Algebra
 \newcommand{\gen}[1]{\left\langle #1 \right\rangle}
-\newcommand{\pres}[2]{\left\langle #1\mid #2 \right\rangle}
+\newcommand{\pres}[2]{\left\langle #1\left| #2 \right.\right\rangle}
 \newcommand{\op}[0]{^\text{op}}
 \newcommand{\freemod}[0]{R^{\oplus S}}
 \newcommand{\units}[1]{#1^{\times}}
@@ -153,6 +153,7 @@
 \DeclareMathOperator{\Out}{Out}
 \DeclareMathOperator{\sHom}{\mathscr{H\mkern-7mu}\textit{om}}
 \DeclareMathOperator{\sExt}{\mathscr{E\mkern-4mu}\textit{xt}}
+\DeclareMathOperator{\sEnd}{\mathscr{E\mkern-3mu}\textit{nd}}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\dertimes}{\overset L\otimes}
@@ -241,7 +242,7 @@
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
 \renewcommand{\split}{\textrm{split}}
-\DeclareMathOperator{\Qbar}{\overline\Q}
+\newcommand{\Qbar}{{\overline\Q}}
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\Sel}{Sel}
 \DeclareMathOperator{\Ell}{Ell}
@@ -253,6 +254,7 @@
 % End Sha stuff
 \DeclareMathOperator{\Art}{Art}
 \DeclareMathOperator{\Spl}{Spl}
+\DeclareMathOperator{\sLat}{\mathscr{L\mkern-4mu}\textit{at}} % script L Lat
 
 %% Modular Forms/Curves
 \newcommand{\sump}{\sideset{}'\sum} % sum prime
@@ -329,6 +331,7 @@
 \newcommand{\dx}[0]{\d x}
 \newcommand{\dbx}[0]{\d\bar x}
 \newcommand{\dy}[0]{\d y}
+\newcommand{\dby}[0]{\d\bar y}
 \newcommand{\dz}[0]{\d z}
 \newcommand{\dbz}[0]{\d\bar z}
 \newcommand{\df}[0]{\d f}
@@ -346,7 +349,8 @@
 
 %% Algebraic Topology
 \newcommand{\rel}[1]{\sqbracks{#1}_{\mrm{rel}}} % Relative fundamental class
-\newcommand{\KSp}{\mrm{Ksp}}
+\newcommand{\KSp}{\mrm{KSp}}
+\newcommand{\KH}{\mrm{KH}}
 \DeclareMathOperator{\mog}{mog}
 \DeclareMathOperator{\Sq}{Sq}
 \DeclareMathOperator{\Th}{Th}
@@ -473,6 +477,7 @@
 
 % Complex Analysis
 \DeclareMathOperator\Arg{Arg}
+\DeclareMathOperator\cotan{cotan}
 
 %% Quantum Mechanics/Computing
 \newcommand{\ket}[1]{\left|#1\right>}
@@ -571,6 +576,12 @@
     \begin{tikzcd}[ampersand replacement=\&]
         {#1}\ar[d, "{#2}" left]\\
         {#3}\ar[u, bend right, "{#4}" right]
+    \end{tikzcd}
+}
+\newcommand{\correspondence}[5]{ % maybe I should have called this \zigzag`
+    \begin{tikzcd}[ampersand replacement=\&]
+        \&{#1}\ar[dl, "{#2}" left]\ar[dr, "{#3}" right]\\
+        {#4}\&\&{#5}
     \end{tikzcd}
 }
 
@@ -724,6 +735,7 @@
 \newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
 \newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
 \newcommand{\from}{\leftarrow}
+\newcommand{\fromm}{\longleftarrow}
 \newcommand{\xto}{\xrightarrow}
 \newcommand{\xfrom}{\xleftarrow}
 \newcommand{\too}{\longrightarrow}
@@ -731,14 +743,24 @@
 \newcommand{\iso}{\xto\sim}
 \newcommand{\isoo}{\xtoo\sim}
 \newcommand{\xiso}[1]{\overset{#1}\iso}
+\newcommand{\fiso}{\xfrom\sim}
+\newcommand{\xfiso}[1]{\overset{#1}\fiso}
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\xinto}[1]{\overset{#1}\into}
 \newcommand{\finto}{\hookleftarrow}
 \newcommand{\xfinto}[1]{\overset{#1}\finto}
+\newcommand{\intoo}{\longhookrightarrow}
+\newcommand{\xintoo}[1]{\overset{#1}\intoo}
+\newcommand{\fintoo}{\longhookleftarrow}
+\newcommand{\xfintoo}[1]{\overset{#1}\fintoo}
 \newcommand{\onto}{\twoheadrightarrow}
 \newcommand{\xonto}[1]{\overset{#1}\onto}
 \newcommand{\fonto}{\twoheadleftarrow}
 \newcommand{\xfonto}[1]{\overset{#1}\fonto}
+%\newcommand{\ontoo}{\longtwoheadrightarrow}
+%\newcommand{\xontoo}[1]{\overset{#1}\ontoo}
+%\newcommand{\fontoo}{\longtwoheadleftarrow}
+%\newcommand{\xfontoo}[1]{\overset{#1}\fontoo}
 \newcommand{\bij}{\leftrightarrow}
 \newcommand{\biij}{\longleftrightarrow}
 \newcommand{\longbij}{\biij}

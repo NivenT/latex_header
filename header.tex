@@ -25,6 +25,7 @@
 \usepackage{appendix}
 \usepackage[normalem]{ulem}
 \usepackage{ytableau}
+\usepackage{blkarray}
 
 % https://tex.stackexchange.com/questions/69085/two-different-calligraphic-font-styles-in-math-mode
 % calrsfs messes with mathcal. This makes pazocal what mathcal usually is
@@ -88,8 +89,11 @@
 \newcommand{\vVec}[3]{\begin{pmatrix}#1\\#2\\#3\end{pmatrix}}
 \newcommand{\mat}[4]{\begin{pmatrix}#1&#2\\ #3&#4\end{pmatrix}}
 \newcommand{\matt}[4]{\mat{#1}{#3}{#2}{#4}}
-\newcommand{\Mat}[9]{\begin{pmatrix}#1&#2&#3\\#4&#5&#6\\#7&#8&#9\end{pmatrix}}
-\newcommand{\Matt}[9]{\begin{pmatrix}#1&#4&#7\\#2&#5&#8\\#3&#6&#9\end{pmatrix}} %matrix transpose
+\newcommand{\Mat}[9]{\begin{pmatrix}{#1}&{#2}&{#3}\\{#4}&{#5}&{#6}\\{#7}&{#8}&{#9}\end{pmatrix}}
+\newcommand{\Matt}[9]{\Mat{#1}{#4}{#7}{#2}{#5}{#8}{#3}{#6}{#9}} %matrix transpose
+% Latex commands can only take 9 arguments, so need to cheat with a helper command to support > 9 args
+\newcommand{\MAT}[7]{\begin{pmatrix}{#1}&{#2}&{#3}&{#4}\\{#5}&{#6}&{#7}&\MATHelper}
+\newcommand{\MATHelper}[9]{{#1}\\{#2}&{#3}&{#4}&{#5}\\{#6}&{#7}&{#8}&{#9}\end{pmatrix}}
 \newcommand{\Wedge}{\bigwedge\nolimits}
 \newcommand{\topwedge}{\Wedge^{\mrm{top}}}
 \newcommand{\Span}[1]{\spn\left\{#1\right\}}
@@ -144,6 +148,7 @@
 \newcommand{\tors}[1]{#1_{\mrm{tors}}}
 \newcommand{\normal}{\triangleleft}
 \newcommand{\irr}[1]{#1^{\mrm{irr}}} 
+\newcommand{\inn}{\mrm{inn}}
 \DeclareMathOperator{\image}{image}
 \DeclareMathOperator{\Hom}{Hom}	
 \DeclareMathOperator{\Sur}{Sur}
@@ -180,6 +185,7 @@
 \DeclareMathOperator{\Mod}{Mod}
 \DeclareMathOperator{\CAlg}{Calg}
 \DeclareMathOperator{\Irr}{Irr} % Do I want a separate section for representation theory?
+\DeclareMathOperator{\Irrep}{Irrep}
 
 %% Algebraic Number Theory/Field Theory
 \newcommand{\qadj}[1]{\mathbb Q\left(#1\right)}
@@ -256,11 +262,12 @@
 \DeclareMathOperator{\Spl}{Spl}
 \DeclareMathOperator{\sLat}{\mathscr{L\mkern-4mu}\textit{at}} % script L Lat
 
-%% Modular Forms/Curves
+%% Modular Forms/Curves and automorphic stuff
 \newcommand{\sump}{\sideset{}'\sum} % sum prime
 \newcommand{\sums}{\sideset{}*\sum} % sum star
 \newcommand{\prodp}{\sideset{}'\prod}
 \newcommand{\bigotimesp}{\sideset{}'\bigotimes}
+\newcommand{\otimesp}{\sideset{}'\otimes}
 \newcommand{\slz}{\SL_2(\Z)}
 \newcommand{\glp}{\GL_2^+}
 % These were useful for one exercise long ago, but not for anything else
@@ -328,6 +335,7 @@
 \newcommand{\du}[0]{\d u}
 \newcommand{\dv}[0]{\d v}
 \newcommand{\dw}[0]{\d w}
+\newcommand{\dX}[0]{\d X}
 \newcommand{\dx}[0]{\d x}
 \newcommand{\dbx}[0]{\d\bar x}
 \newcommand{\dy}[0]{\d y}
@@ -336,10 +344,12 @@
 \newcommand{\dbz}[0]{\d\bar z}
 \newcommand{\df}[0]{\d f}
 \newcommand{\dm}[0]{\d m}
+\newcommand{\dn}[0]{\d n}
 \newcommand{\da}[0]{\d a}
 \newcommand{\db}[0]{\d b}
 \newcommand{\dc}[0]{\d c}
 \renewcommand{\dh}{\d h}
+\newcommand{\dr}[0]{\d r}
 \renewcommand{\d}{\mathrm d} % This had a \, in the front before. Will I regret removing it?
 \DeclareMathOperator{\Tube}{Tube}
 \DeclareMathOperator{\dvol}{dvol}
@@ -365,8 +375,8 @@
 \DeclareMathOperator{\Tot}{Tot}
 \DeclareMathOperator{\sk}{sk}
 
-%% Category Theory
-\newcommand{\gr}{\mrm{gr}}
+%% Some common categories
+\newcommand{\gr}{\mrm{gr}} % What is this and why is it here?
 \newcommand{\Cat}{\mrm{Cat}}
 \newcommand{\SSet}{\mrm{SSet}}
 \newcommand{\CW}{\mrm{CW}}
@@ -374,6 +384,7 @@
 \newcommand{\Set}{\mrm{Set}}
 \newcommand{\FinSet}{\mrm{FinSet}}
 \newcommand{\Fin}{\mrm{Fin}}
+\newcommand{\FinCov}{\mrm{FinCov}}
 \newcommand{\Top}{\mrm{Top}}
 \newcommand{\VB}{\mrm{VB}}
 \newcommand{\Ban}{\mrm{Ban}} % Banach
@@ -403,18 +414,20 @@
 \newcommand{\PSL}{\mrm{PSL}}
 \newcommand{\PGL}{\mrm{PGL}}
 \newcommand{\SO}{\mrm{SO}}
+\newcommand{\PSO}{\mrm{PSO}}
 \newcommand{\U}{\mrm{U}}
 \newcommand{\SU}{\mrm{SU}}
+\newcommand{\PSU}{\mrm{PSU}}
 \DeclareMathOperator{\Lie}{Lie}
-\DeclareMathOperator{\ad}{ad}
+\newcommand{\ad}{\mrm{ad}}
 \DeclareMathOperator{\Ad}{Ad}
 \DeclareMathOperator{\FL}{FL}
 
 %% Complex/Algebraic Geometry + Sheaf Theory
 \newcommand{\msEX}[1]{\msE_X^{(#1)}}
-\newcommand{\red}[1]{{#1}_{\mrm{red}}}
+\newcommand{\red}[1]{#1_{\mrm{red}}}
 \newcommand{\cs}[1]{\parens{\ints{#1},\abs{#1}}} % Complex space
-\newcommand{\derpush}[2]{{#2}_{*#1}}
+\newcommand{\derpush}[2]{#2_{*#1}}
 \newcommand{\smp}[1]{{#1}^{\mrm{sm}}} % smooth points
 \newcommand{\an}[1]{{#1}^{\mrm{an}}}
 \renewcommand{\sharp}[1]{{#1}^\#}
@@ -578,10 +591,16 @@
         {#3}\ar[u, bend right, "{#4}" right]
     \end{tikzcd}
 }
-\newcommand{\correspondence}[5]{ % maybe I should have called this \zigzag`
+\newcommand{\correspondence}[5]{ % maybe I should have called this \zigzag
     \begin{tikzcd}[ampersand replacement=\&]
-        \&{#1}\ar[dl, "{#2}" left]\ar[dr, "{#3}" right]\\
+        \&{#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
         {#4}\&\&{#5}
+    \end{tikzcd}
+}
+\newcommand{\mapdown}[4]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        {#1}\ar[d, "{#2}" left, "{#3}" right]\\
+        {#4}
     \end{tikzcd}
 }
 
@@ -611,10 +630,12 @@
 \newcommand{\mfu}{\mathfrak u}
 \newcommand{\mfU}{\mathfrak U}
 \newcommand{\mfM}{\mathfrak M}
+\newcommand{\mfs}{\mathfrak s}
 \newcommand{\mbf}{\mathbf}
 \newcommand{\mbfx}{\mathbf x}
 \newcommand{\mbfy}{\mathbf y}
 \newcommand{\mbfU}{\mathbf U}
+\newcommand{\mbfV}{\mathbf V}
 \newcommand{\msO}{\mathscr O}
 \newcommand{\mscr}{\mathscr}
 \newcommand{\mf}{\mathfrak}
@@ -645,6 +666,7 @@
 \newcommand{\mcB}{\mc B}
 \newcommand{\mcD}{\mc D}
 \newcommand{\mcK}{\mc K}
+\newcommand{\mcI}{\mc I}
 \newcommand{\mcP}{\mc P}
 \newcommand{\mcR}{\mc R}
 \newcommand{\mcT}{\mc T}
@@ -666,6 +688,7 @@
 \newcommand{\mcG}{\mc G}
 \newcommand{\mcS}{\mc S}
 \newcommand{\mcM}{\mc M}
+\newcommand{\mcN}{\mc N}
 \newcommand{\mcL}{\mc L}
 \newcommand{\mcC}{\mc C}
 \newcommand{\mrm}{\mathrm}
@@ -743,6 +766,7 @@
 \newcommand{\iso}{\xto\sim}
 \newcommand{\isoo}{\xtoo\sim}
 \newcommand{\xiso}[1]{\overset{#1}\iso}
+\newcommand{\xisoo}[1]{\overset{#1}\isoo}
 \newcommand{\fiso}{\xfrom\sim}
 \newcommand{\xfiso}[1]{\overset{#1}\fiso}
 \newcommand{\into}{\hookrightarrow}
@@ -764,6 +788,7 @@
 \newcommand{\bij}{\leftrightarrow}
 \newcommand{\biij}{\longleftrightarrow}
 \newcommand{\longbij}{\biij}
+\newcommand{\xbij}[1]{\overset{#1}\bij}
 \newcommand{\dashto}{\dashrightarrow}
 \newcommand{\cofib}{\rightarrowtail}
 \newcommand{\toto}{\rightrightarrows}
@@ -771,6 +796,15 @@
 \newcommand{\fromfrom}{\leftleftarrows}
 \newcommand{\tofrom}{\rightleftarrows}
 \newcommand{\fromto}{\leftrightarrows}
+% https://tex.stackexchange.com/questions/195025/how-to-get-the-opposite-direction-of-rightsquigarrow
+\makeatletter
+\providecommand{\leftsquigarrow}{%
+  \mathrel{\mathpalette\reflect@squig\relax}%
+}
+\newcommand{\reflect@squig}[2]{%
+  \reflectbox{$\m@th#1\rightsquigarrow$}%
+}
+\makeatother
 
 %% Misc
 \newcommand{\Avg}[0]{\mrm{Avg}}
@@ -797,14 +831,14 @@
 \newcommand{\twocases}[3]{
 	\begin{cases}
 		\hfill#1\hfill&\text{if }#2\\
-		\hfill#3\hfill&\text{otherwise}
+		\hfill#3\hfill&\text{otherwise.}
 	\end{cases}
 }
 \newcommand{\threecases}[5]{
 	\begin{cases}
 		\hfill#1\hfill&\text{if }#2\\
 		\hfill#3\hfill&\text{if }#4\\
-		\hfill#5\hfill&\text{otherwise}
+		\hfill#5\hfill&\text{otherwise.}
 	\end{cases}
 }
 \newcommand{\Twocases}[4]{
@@ -878,7 +912,9 @@
 \newcommand{\tforall}{\,\text{ for all }\,}
 \newcommand{\tforsome}{\,\text{ for some }\,}
 \newcommand{\tsince}{\,\text{ since }\,}
-\renewcommand\t\text % Not sure if I want to keep this
+\newcommand{\totherwise}{\,\text{ otherwise }\,}
+\newcommand{\texists}{\,\text{ exists }\,}
+\renewcommand\t\text % Not sure if I want to keep this (Update: I do)
 
 %% Marginal Notes
 \newcommand{\confusion}[1]{\todo[color=red!70]{#1}}

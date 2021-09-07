@@ -26,6 +26,8 @@
 \usepackage[normalem]{ulem}
 \usepackage{ytableau}
 \usepackage{blkarray}
+\usepackage{mathtools}
+\usepackage{verbatim}
 
 % https://tex.stackexchange.com/questions/69085/two-different-calligraphic-font-styles-in-math-mode
 % calrsfs messes with mathcal. This makes pazocal what mathcal usually is
@@ -37,10 +39,13 @@
 
 %% lists
 %\setlist[itemize]{align=left} % only looks good when bullets replaced by long labels
-\setlist[enumerate]{align=right}
-\setlist[enumerate,1]{label=\llap{\bfseries{(\arabic*)}}}
-\setlist[enumerate,2]{label=\llap{\bfseries{(\arabic{enumi}.\arabic*)}}}
-\setlist[enumerate,3]{label=\llap{\bfseries{(\arabic{enumi}.\arabic{enumii}.\roman*)}}}
+\setlist[enumerate]{align=right, label=\llap{\bfseries{(\arabic*)}}}
+%\setlist[enumerate,1]{label=\llap{\bfseries{(\arabic*)}}}
+%\setlist[enumerate,2]{label=\llap{\bfseries{(\arabic{enumi}.\arabic*)}}}
+%\setlist[enumerate,3]{label=\llap{\bfseries{(\arabic{enumi}.\arabic{enumii}.\roman*)}}}
+
+\newenvironment{alphabetize}{\begin{enumerate}[label=\llap{\bfseries{(\alph*)}}]}{\end{enumerate}}
+\newenvironment{romanize}{\begin{enumerate}[label=\llap{\bfseries{(\roman*)}}]}{\end{enumerate}}
 
 \pgfplotsset{width=7cm,compat=1.9}
 
@@ -96,7 +101,7 @@
 \newcommand{\MATHelper}[9]{{#1}\\{#2}&{#3}&{#4}&{#5}\\{#6}&{#7}&{#8}&{#9}\end{pmatrix}}
 \newcommand{\Wedge}{\bigwedge\nolimits}
 \newcommand{\topwedge}{\Wedge^{\mrm{top}}}
-\newcommand{\Span}[1]{\spn\left\{#1\right\}}
+\newcommand{\Span}[1]{\t{span}\b{#1}}
 \newcommand{\dual}[1]{#1^\vee}
 \newcommand{\pdual}[1]{\p{#1}^\vee}
 \DeclareMathOperator{\spn}{span}
@@ -184,6 +189,7 @@
 \DeclareMathOperator{\Mor}{Mor}
 \DeclareMathOperator{\Mod}{Mod}
 \DeclareMathOperator{\CAlg}{Calg}
+\DeclareMathOperator{\Alg}{Alg}
 \DeclareMathOperator{\Irr}{Irr} % Do I want a separate section for representation theory?
 \DeclareMathOperator{\Irrep}{Irrep}
 
@@ -267,7 +273,7 @@
 \newcommand{\sums}{\sideset{}*\sum} % sum star
 \newcommand{\prodp}{\sideset{}'\prod}
 \newcommand{\bigotimesp}{\sideset{}'\bigotimes}
-\newcommand{\otimesp}{\sideset{}'\otimes}
+\newcommand{\otimesp}{\otimes'}
 \newcommand{\slz}{\SL_2(\Z)}
 \newcommand{\glp}{\GL_2^+}
 % These were useful for one exercise long ago, but not for anything else
@@ -317,6 +323,7 @@
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\SP}{SP}
 \DeclareMathOperator{\Homeo}{Homeo}
+\DeclareMathOperator{\Conf}{Conf}
 
 %% Differential Geometry/Topology
 \newcommand{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
@@ -345,6 +352,8 @@
 \newcommand{\df}[0]{\d f}
 \newcommand{\dm}[0]{\d m}
 \newcommand{\dn}[0]{\d n}
+\newcommand{\dq}[0]{\d q}
+\newcommand{\dk}[0]{\d k}
 \newcommand{\da}[0]{\d a}
 \newcommand{\db}[0]{\d b}
 \newcommand{\dc}[0]{\d c}
@@ -395,11 +404,13 @@
 \newcommand{\Groupoid}{\mrm{Groupoid}}
 \newcommand{\Grp}{\mrm{Grp}}
 \newcommand{\Grpoid}{\mrm{Grpoid}}
+\newcommand{\Grpd}{\mrm{Grpd}}
 \newcommand{\QCoh}{\mrm{QCoh}}
 \newcommand{\Def}{\mrm{Def}} % deformations
 \newcommand{\Ch}{\mrm{Ch}} % chain complexes
 \newcommand{\CMon}{\mrm{CMon}}
 \newcommand{\PSp}{\mrm{PSp}} % pre-spectra
+\newcommand{\Fun}{\mrm{Fun}} % Functors
 
 %% Lie Theory
 \newcommand{\dg}{\d g}
@@ -444,6 +455,7 @@
 \newcommand{\etpi}{\pi^{\text{\'et}}}
 \newcommand{\fppf}[1]{#1_{\text{fppf}}} % Note sure if this (and \bfppf) are good inclusions
 \newcommand{\bfppf}[1]{#1_{\text{Fppf}}}
+\newcommand{\fhom}{\mrm H_{\text{fppf}}}
 \newcommand{\Hur}{\mrm{Hur}}
 \newcommand{\Hilb}{\mrm{Hilb}}
 \newcommand{\Quot}{\mrm{Quot}}
@@ -460,6 +472,7 @@
 \DeclareMathOperator{\pcoker}{pcoker}
 \DeclareMathOperator{\Et}{Et}
 \DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\CaCl}{CaCl}
 \DeclareMathOperator{\res}{res}
 \DeclareMathOperator{\cechhom}{\check{H}}
 \DeclareMathOperator{\chom}{\cechhom}
@@ -557,8 +570,18 @@
 	{#6}\ar[r, "{#7}" above]\&{#8}
 	\end{tikzcd}
 }
-\newcommand{\pullback}[6]{\commsquare{#1}{}{#2}{}{#3}{#4}{#5}{#6}}
-\newcommand{\pushout}[6]{\commsquare{#1}{#2}{#3}{#4}{}{#5}{}{#6}}
+\newcommand{\pullback}[6]{
+	\begin{tikzcd}[ampersand replacement=\&]
+	{#1}\ar[r]\ar[d]\arrow[dr, phantom, "\ulcorner", very near start]\&{#2}\ar[d, "{#3}" right]\\
+	{#4}\ar[r, "{#5}" above]\&{#6}
+	\end{tikzcd}
+}
+\newcommand{\pushout}[6]{
+	\begin{tikzcd}[ampersand replacement=\&]
+	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d]\\
+	{#5}\ar[r]\&{#6}\ar[ul, phantom, "\lrcorner", very near start]
+	\end{tikzcd}
+}
 \newcommand{\barecommsquare}[4]{\commsquare{#1}{}{#2}{}{}{#3}{}{#4}}
 \newcommand{\liftsquare}[9]{
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -603,6 +626,14 @@
         {#4}
     \end{tikzcd}
 }
+\newcommand{\galoisdiamond}[8]{
+    \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={dash}]
+        \&{#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
+        {#4}\ar[dr, "{#6}"']\&\&{#5}\ar[dl, "{#7}"]\\
+        \&{#8}
+    \end{tikzcd}
+}
+\newcommand{\baregaloisdiamond}[4]{\galoisdiamond{#1}{}{}{#2}{#3}{}{}{#4}}
 
 %% Limit type things
 
@@ -659,8 +690,10 @@
 \newcommand{\msW}{\ms W}
 \newcommand{\msX}{\ms X}
 \newcommand{\ms}{\mathscr}
+\newcommand{\msU}{\ms U}
 \newcommand{\mfq}{\mf q}
 \newcommand{\mfP}{\mf P}
+\newcommand{\mfQ}{\mf Q}
 \newcommand{\mc}{\mathcal} % Change to pazocal if you ever go back to using calrsfs for some reason
 \newcommand{\mcA}{\mc A}
 \newcommand{\mcB}{\mc B}
@@ -711,7 +744,7 @@
 \newcommand{\vphi}{\varphi}
 \renewcommand{\tau}{\uptau}
 \renewcommand{\P}{\mathbb P}
-\DeclareMathOperator{\msE}{\ms E}
+\newcommand{\msE}{\ms E}
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
 \newcommand{\me}{\matheuler}
@@ -830,28 +863,28 @@
 \renewcommand{\ast}[1]{#1^*}
 \newcommand{\twocases}[3]{
 	\begin{cases}
-		\hfill#1\hfill&\text{if }#2\\
-		\hfill#3\hfill&\text{otherwise.}
+		\hfill\displaystyle #1\hfill&\text{if }\displaystyle #2\\
+		\hfill\displaystyle #3\hfill&\text{otherwise.}
 	\end{cases}
 }
 \newcommand{\threecases}[5]{
 	\begin{cases}
-		\hfill#1\hfill&\text{if }#2\\
-		\hfill#3\hfill&\text{if }#4\\
-		\hfill#5\hfill&\text{otherwise.}
+		\hfill\displaystyle #1\hfill&\text{if }\displaystyle #2\\
+		\hfill\displaystyle #3\hfill&\text{if }\displaystyle #4\\
+		\hfill\displaystyle #5\hfill&\text{otherwise.}
 	\end{cases}
 }
 \newcommand{\Twocases}[4]{
 	\begin{cases}
-		\hfill#1\hfill&\text{if }#2\\
-		\hfill#3\hfill&\text{if }#4
+		\hfill\displaystyle #1\hfill&\text{if }\displaystyle #2\\
+		\hfill\displaystyle #3\hfill&\text{if }\displaystyle #4
 	\end{cases}
 }
 \newcommand{\Threecases}[6]{
 	\begin{cases}
-		\hfill#1\hfill&\text{if }#2\\
-		\hfill#3\hfill&\text{if }#4\\
-		\hfill#5\hfill&\text{if }#6
+		\hfill\displaystyle #1\hfill&\text{if }\displaystyle #2\\
+		\hfill\displaystyle #3\hfill&\text{if }\displaystyle #4\\
+		\hfill\displaystyle #5\hfill&\text{if }\displaystyle #6
 	\end{cases}
 }
 \newcommand{\push}[1]{#1_*}
@@ -859,8 +892,8 @@
 \newcommand{\by}{\times}
 \newcommand{\mapdesc}[5]{
 	\begin{matrix}
-		\ifblank{#1}{}{#1:}&#2&\longrightarrow&#3\\
-		&#4&\longmapsto&#5
+		\ifblank{#1}{}{\displaystyle#1:}&\displaystyle#2&\longrightarrow&\displaystyle#3\\
+		&\displaystyle#4&\longmapsto&\displaystyle #5
 	\end{matrix}
 }
 %\newcommand{\mapdesc}[5]{
@@ -1057,6 +1090,7 @@
 \theoremstyle{remark}
 \newtheorem{rem}[thm]{Remark}
 \newtheorem{construct}[thm]{Construction}
+\newtheorem{obs}[thm]{Observation}
 \newtheorem{note}{Note}
 \newtheorem*{counterex}{Counterexample}
 \newtheorem*{exc}{Exercise}

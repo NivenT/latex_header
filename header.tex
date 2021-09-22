@@ -124,9 +124,9 @@
 \newcommand{\odd}[1]{#1^{\mrm{odd}}}
 \newcommand{\invlim}{\varprojlim\limits}
 \newcommand{\dirlim}{\varinjlim\limits}
-\newcommand{\colim}{\mrm{colim}}
-\newcommand{\holim}{\mrm{holim}}
-\newcommand{\hocolim}{\mrm{hocolim}}
+\newcommand{\colim}{\operatorname{colim}}
+\newcommand{\holim}{\operatorname{holim}}
+\newcommand{\hocolim}{\operatorname{hocolim}}
 \newcommand{\ses}[5]{
 	\begin{tikzcd}[ampersand replacement=\&]
 		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
@@ -153,7 +153,7 @@
 \newcommand{\tors}[1]{#1_{\mrm{tors}}}
 \newcommand{\normal}{\triangleleft}
 \newcommand{\irr}[1]{#1^{\mrm{irr}}} 
-\newcommand{\inn}{\mrm{inn}}
+\newcommand{\inn}{\operatorname{inn}}
 \DeclareMathOperator{\image}{image}
 \DeclareMathOperator{\Hom}{Hom}	
 \DeclareMathOperator{\Sur}{Sur}
@@ -177,7 +177,7 @@
 \DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Ext}{Ext}
-\renewcommand{\hom}{\mathrm H}
+\renewcommand{\hom}{\operatorname H}
 \DeclareMathOperator{\ZG}{\Z G}
 \DeclareMathOperator{\sat}{sat}
 \DeclareMathOperator{\Torsion}{Torsion}
@@ -219,7 +219,7 @@
 \newcommand{\codiff}[1]{#1^*}
 \newcommand{\compl}[1]{#1^{\wedge}} % Completion
 \newcommand{\al}[1]{#1^{\mrm{al}}}
-\newcommand{\rad}{\mrm{rad}} % radical
+\newcommand{\rad}{\operatorname{rad}} % radical
 \newcommand{\fieldtower}[6]{
     \begin{tikzcd}[ampersand replacement=\&]
 	    {#1}\ar[d, dash, "{#5}" right]\ar[dd, dash, bend right, "{#4}" left]\\
@@ -249,7 +249,7 @@
 \DeclareMathOperator{\Pic}{Pic}
 \DeclareMathOperator{\atensor}{\otimes_A}
 \DeclareMathOperator{\ord}{ord}
-\newcommand{\Frob}{\mrm{Frob}}
+\newcommand{\Frob}{\operatorname{Frob}}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
@@ -287,7 +287,7 @@
 
 %% p-adic stuff
 \newcommand{\caret}[1]{{#1}^{\wedge}}
-\newcommand{\val}{\mrm{val}}
+\newcommand{\val}{\operatorname{val}}
 \DeclareMathOperator{\LA}{LA}
 \DeclareMathOperator{\Coh}{Coh}
 \DeclareMathOperator{\ctensor}{\wh\otimes} % complete tensor
@@ -368,8 +368,8 @@
 
 %% Algebraic Topology
 \newcommand{\rel}[1]{\sqbracks{#1}_{\mrm{rel}}} % Relative fundamental class
-\newcommand{\KSp}{\mrm{KSp}}
-\newcommand{\KH}{\mrm{KH}}
+\newcommand{\KSp}{\operatorname{KSp}}
+\newcommand{\KH}{\operatorname{KH}}
 \DeclareMathOperator{\mog}{mog}
 \DeclareMathOperator{\Sq}{Sq}
 \DeclareMathOperator{\Th}{Th}
@@ -417,20 +417,20 @@
 \newcommand{\rs}[1]{#1^{\mrm{rs}}}
 \newcommand{\der}[1]{#1^{\mrm{der}}}
 \newcommand{\reg}[1]{#1^{\mrm{reg}}}
-\newcommand{\GL}{\mrm{GL}}
-\newcommand{\Spin}{\mrm{Spin}}
-\newcommand{\Sp}{\mrm{Sp}}
-\newcommand{\GSp}{\mrm{GSp}}
-\newcommand{\SL}{\mrm{SL}}
-\newcommand{\PSL}{\mrm{PSL}}
-\newcommand{\PGL}{\mrm{PGL}}
-\newcommand{\SO}{\mrm{SO}}
-\newcommand{\PSO}{\mrm{PSO}}
-\newcommand{\U}{\mrm{U}}
-\newcommand{\SU}{\mrm{SU}}
-\newcommand{\PSU}{\mrm{PSU}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Spin}{\operatorname{Spin}}
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\GSp}{\operatorname{GSp}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\PSO}{\operatorname{PSO}}
+\newcommand{\U}{\operatorname{U}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\PSU}{\operatorname{PSU}}
 \DeclareMathOperator{\Lie}{Lie}
-\newcommand{\ad}{\mrm{ad}}
+\newcommand{\ad}{\operatorname{ad}}
 \DeclareMathOperator{\Ad}{Ad}
 \DeclareMathOperator{\FL}{FL}
 
@@ -442,20 +442,20 @@
 \newcommand{\smp}[1]{{#1}^{\mrm{sm}}} % smooth points
 \newcommand{\an}[1]{{#1}^{\mrm{an}}}
 \renewcommand{\sharp}[1]{{#1}^\#}
-\newcommand{\Jac}{\mrm{Jac}}
-\newcommand{\Gr}{\mrm{Gr}}
-\newcommand{\ind}{\mrm{ind}}
+\newcommand{\Jac}{\operatorname{Jac}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\ind}{\operatorname{ind}} % What is ind?
 \newcommand{\zar}[1]{#1_{\text{zar}}}
 \newcommand{\bzar}[1]{#1_{\text{Zar}}} % Used to be called \bZar so some old files may not compile w/o small edits
 \newcommand{\tet}{\text{\'et}} % text et
 \newcommand{\et}[1]{#1_{\text{\'et}}}
 \newcommand{\bet}[1]{#1_{\text{\'Et}}} % big etale
-\newcommand{\etH}{\mrm H_{\text{\'et}}}
-\newcommand{\ethom}{\mrm H_{\text{\'et}}}
+\newcommand{\etH}{\operatorname H_{\text{\'et}}}
+\newcommand{\ethom}{\operatorname H_{\text{\'et}}}
 \newcommand{\etpi}{\pi^{\text{\'et}}}
 \newcommand{\fppf}[1]{#1_{\text{fppf}}} % Note sure if this (and \bfppf) are good inclusions
 \newcommand{\bfppf}[1]{#1_{\text{Fppf}}}
-\newcommand{\fhom}{\mrm H_{\text{fppf}}}
+\newcommand{\fhom}{\operatorname H_{\text{fppf}}}
 \newcommand{\Hur}{\mrm{Hur}}
 \newcommand{\Hilb}{\mrm{Hilb}}
 \newcommand{\Quot}{\mrm{Quot}}
@@ -555,7 +555,7 @@
 \newcommand{\Ithi}[2]{(\Ith{#1}{#2})^{-1}}
 \newcommand{\itht}[1]{(\ith{#1})^T}
 \newcommand{\Layer}[2]{#1^{\left[#2\right]}}
-\newcommand{\KL}[2]{\mathrm{KL}\left(#1\left\|\,#2\right.\right)}
+\newcommand{\KL}[2]{\operatorname{KL}\left(#1\left\|\,#2\right.\right)}
 
 %% Probability/Statistics
 \newcommand{\prb}[1]{P\left\{#1\right\}}
@@ -566,71 +566,71 @@
 %% Diagrams
 \newcommand{\commsquare}[8]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
-	{#6}\ar[r, "{#7}" above]\&{#8}
+	{\displaystyle #1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{\displaystyle #3}\ar[d, "{#5}" right]\\
+	{\displaystyle #6}\ar[r, "{#7}" above]\&{\displaystyle #8}
 	\end{tikzcd}
 }
 \newcommand{\pullback}[6]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r]\ar[d]\arrow[dr, phantom, "\ulcorner", very near start]\&{#2}\ar[d, "{#3}" right]\\
-	{#4}\ar[r, "{#5}" above]\&{#6}
+	{\displaystyle #1}\ar[r]\ar[d]\arrow[dr, phantom, "\ulcorner", very near start]\&{\displaystyle #2}\ar[d, "{#3}" right]\\
+	{\displaystyle #4}\ar[r, "{#5}" above]\&{\displaystyle #6}
 	\end{tikzcd}
 }
 \newcommand{\pushout}[6]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d]\\
-	{#5}\ar[r]\&{#6}\ar[ul, phantom, "\lrcorner", very near start]
+	{\displaystyle #1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{\displaystyle #3}\ar[d]\\
+	{\displaystyle #5}\ar[r]\&{\displaystyle #6}\ar[ul, phantom, "\lrcorner", very near start]
 	\end{tikzcd}
 }
 \newcommand{\barecommsquare}[4]{\commsquare{#1}{}{#2}{}{}{#3}{}{#4}}
 \newcommand{\liftsquare}[9]{
 	\begin{tikzcd}[ampersand replacement=\&]
-	{#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
-	{#6}\ar[r, "{#7}" above]\ar[ur, dashed, "{#9}" sloped]\&{#8}
+	{\displaystyle #1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{\displaystyle #3}\ar[d, "{#5}" right]\\
+	{\displaystyle #6}\ar[r, "{#7}" above]\ar[ur, dashed, "{#9}" sloped]\&{\displaystyle #8}
 	\end{tikzcd}
 }
 \newcommand{\twocommsquare}[9]{
     \begin{tikzcd}[ampersand replacement=\&]
-        {#1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{#3}\ar[d, "{#5}" right]\\
-        {#6}\ar[r, "{#7}" above]\&{#8}
+        {\displaystyle #1}\ar[r, "{#2}"]\ar[d, "{#4}" left]\&{\displaystyle #3}\ar[d, "{#5}" right]\\
+        {\displaystyle #6}\ar[r, "{#7}" above]\&{\displaystyle #8}
         \ar[Rightarrow, from=u, to=l, "{#9}"', shorten >= 10pt, shorten <= 10pt]
     \end{tikzcd}
 }
 \newcommand{\baretwocommsquare}[4]{\twocommsquare{#1}{}{#2}{}{}{#3}{}{#4}{}}
 \newcommand{\mapover}[6]{
     \begin{tikzcd}[ampersand replacement=\&]
-        {#1}\ar[rr, "{#2}" above]\ar[dr, "{#4}"']\&\&{#3}\ar[dl, "{#5}"]\\
-        \&{#6}
+        {\displaystyle #1}\ar[rr, "{#2}" above]\ar[dr, "{#4}"']\&\&{#3}\ar[dl, "{#5}"]\\
+        \&{\displaystyle #6}
     \end{tikzcd}
 }
 \newcommand{\compdiag}[6]{ % composition diagram
     \begin{tikzcd}[ampersand replacement=\&]
-        {#1}\ar[r, "{#2}" below]\ar[rr, bend left, "{#6}" above]\&{#3}\ar[r, "{#4}" below]\&{#5}
+        {\displaystyle #1}\ar[r, "{#2}" below]\ar[rr, bend left, "{#6}" above]\&{\displaystyle #3}\ar[r, "{#4}" below]\&{\displaystyle #5}
     \end{tikzcd}
 }
 \newcommand{\mapwithsect}[4]{ % map with section
     \begin{tikzcd}[ampersand replacement=\&]
-        {#1}\ar[d, "{#2}" left]\\
-        {#3}\ar[u, bend right, "{#4}" right]
+        {\displaystyle #1}\ar[d, "{#2}" left]\\
+        {\displaystyle #3}\ar[u, bend right, "{#4}" right]
     \end{tikzcd}
 }
 \newcommand{\correspondence}[5]{ % maybe I should have called this \zigzag
     \begin{tikzcd}[ampersand replacement=\&]
-        \&{#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
-        {#4}\&\&{#5}
+        \&{\displaystyle #1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
+        {\displaystyle #4}\&\&{\displaystyle #5}
     \end{tikzcd}
 }
 \newcommand{\mapdown}[4]{
     \begin{tikzcd}[ampersand replacement=\&]
-        {#1}\ar[d, "{#2}" left, "{#3}" right]\\
-        {#4}
+        {\displaystyle #1}\ar[d, "{#2}" left, "{#3}" right]\\
+        {\displaystyle #4}
     \end{tikzcd}
 }
 \newcommand{\galoisdiamond}[8]{
     \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={dash}]
-        \&{#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
-        {#4}\ar[dr, "{#6}"']\&\&{#5}\ar[dl, "{#7}"]\\
-        \&{#8}
+        \&{\displaystyle #1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
+        {\displaystyle #4}\ar[dr, "{#6}"']\&\&{\displaystyle #5}\ar[dl, "{#7}"]\\
+        \&{\displaystyle #8}
     \end{tikzcd}
 }
 \newcommand{\baregaloisdiamond}[4]{\galoisdiamond{#1}{}{}{#2}{#3}{}{}{#4}}
@@ -786,6 +786,7 @@
 \newcommand{\coint}[2]{\left[#1,#2\right)} % Closed, open interval
 \newcommand{\dsqbracks}[1]{\left\llbracket#1\right\rrbracket}
 \newcommand{\dsq}{\dsqbracks}
+\newcommand{\dparens}[1]{\p{\!\p{#1}\!}}
 
 %% Arrows
 \newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
@@ -840,7 +841,7 @@
 \makeatother
 
 %% Misc
-\newcommand{\Avg}[0]{\mrm{Avg}}
+\newcommand{\Avg}[0]{\operatorname{Avg}}
 \newcommand{\actson}{\curvearrowright}
 \newcommand{\actedon}{\curvearrowleft}
 \newcommand{\conj}{\overline}
@@ -902,11 +903,11 @@
 %        &#4 &&\longmapsto &&#5
 %    \end{alignat}
 %}
-\renewcommand{\div}{\mathrm{div}} % Might regret this one day
+\renewcommand{\div}{\operatorname{div}} % Might regret this one day
 \newcommand*{\cube}{\mbox{\mancube}}
 \DeclareMathOperator{\sign}{sign}
-\renewcommand{\Re}{\mathrm{Re}}
-\renewcommand{\Im}{\mathrm{Im}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\nimplies}{\nRightarrow}
 \renewcommand{\bar}{\overline}
 \DeclareMathOperator{\Dom}{Dom}

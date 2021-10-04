@@ -1,5 +1,5 @@
 \usepackage[onehalfspacing]{setspace}
-\usepackage[margin=0.6in]{geometry}
+\usepackage{geometry} % Used to include [margin=0.6in], but that's dumb to have here. Use \geometry{margin=blah} in your document to set margin length
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -247,9 +247,9 @@
 \DeclareMathOperator{\trdeg}{trdeg}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Pic}{Pic}
-\DeclareMathOperator{\atensor}{\otimes_A}
+\DeclareMathOperator{\atensor}{\otimes_A} % Some of my commands are just stupid, but stick around because I care about backwards compatibility (for now)
 \DeclareMathOperator{\ord}{ord}
-\newcommand{\Frob}{\operatorname{Frob}}
+\newcommand{\Frob}{\mrm{Frob}} % I need a consistent way of deciding when to use \mrm and when to use \opratorname
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
@@ -426,11 +426,11 @@
 \newcommand{\PGL}{\operatorname{PGL}}
 \newcommand{\SO}{\operatorname{SO}}
 \newcommand{\PSO}{\operatorname{PSO}}
-\newcommand{\U}{\operatorname{U}}
+%\newcommand{\U}{\operatorname{U}}
 \newcommand{\SU}{\operatorname{SU}}
 \newcommand{\PSU}{\operatorname{PSU}}
 \DeclareMathOperator{\Lie}{Lie}
-\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\ad}{\mathrm{ad}}
 \DeclareMathOperator{\Ad}{Ad}
 \DeclareMathOperator{\FL}{FL}
 
@@ -665,6 +665,13 @@
 \newcommand{\mbf}{\mathbf}
 \newcommand{\mbfx}{\mathbf x}
 \newcommand{\mbfy}{\mathbf y}
+\newcommand{\mbfz}{\mathbf z}
+\newcommand{\mbfi}{\mathbf i}
+\newcommand{\mbfj}{\mathbf j}
+\newcommand{\mbfk}{\mathbf k}
+\newcommand{\mbfe}{\mathbf e}
+\newcommand{\mbff}{\mathbf f}
+\newcommand{\mbfh}{\mathbf h}
 \newcommand{\mbfU}{\mathbf U}
 \newcommand{\mbfV}{\mathbf V}
 \newcommand{\msO}{\mathscr O}
@@ -889,7 +896,9 @@
 	\end{cases}
 }
 \newcommand{\push}[1]{#1_*}
+\newcommand{\ppush}[1]{\p{#1}_*}
 \newcommand{\pull}[1]{#1^*}
+\newcommand{\ppull}[1]{\p{#1}^*}
 \newcommand{\by}{\times}
 \newcommand{\mapdesc}[5]{
 	\begin{matrix}
@@ -944,6 +953,7 @@
 \newcommand{\tthen}{\,\text{ then }\,}
 \newcommand{\tvia}{\,\text{ via }\,}
 \newcommand{\tforall}{\,\text{ for all }\,}
+\newcommand{\tforany}{\,\text{ for any }\,}
 \newcommand{\tforsome}{\,\text{ for some }\,}
 \newcommand{\tsince}{\,\text{ since }\,}
 \newcommand{\totherwise}{\,\text{ otherwise }\,}

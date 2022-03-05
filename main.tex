@@ -13,6 +13,62 @@
 \author{Niven Achenjang}
 
 \begin{document}
+\section{Custom Tex Cheat Sheet}
+
+\begin{itemize}
+    \item Fonts
+    \begin{itemize}
+        \item Most fonts have two letter abbreviations (e.g. \verb+\mathcal -> \mc+ and \verb+\mathscript -> \ms+)
+        \item Most common letters have commands just for them, e.g. $\msO$ is \verb+\msO+, $\mfp$ is \verb+\mfp+, and $\mcF$ is \verb+\mcF+, $\mfH$ is \verb+\mfH+, and $\meX$ is \verb+\meX+
+    \end{itemize}
+    \item Grouping symbols
+    \begin{itemize}
+        \item You can use \verb+\p+ for parentheses, \verb+\b+ for brackets, and \verb+\sq+ for square brackes. These all scale automatically, e.g.
+        $$\b{x\in\p{\Z+\frac12}:\frac15\sq{H(x)-\sum_xf(x)}<\eps}$$
+        is \verb|\b{x\in\p{\Z+\frac12}:\frac15\sq{H(x)-\sum_xf(x)}<\eps}|. There's also \verb+\angles+ for angle brackets as well as \verb+\floor+ and \verb+\ceil+.
+        \item You have use \verb+\pinv+ for parentheses with an inverse at the end, e.g. $\pinv{1+\frac1{p^s}}$ is \verb|\pinv{1+\frac1{p^s}}|. You can use $\verb+\pfrac+$ for a fraction in parentheses, e.g. $\pfrac{x+5}3$ is \verb|\pfrac{x+5}3|
+    \end{itemize}
+    \item Arrows and common diagrams
+    \begin{itemize}
+        \item You can use \verb+\to+ and \verb+\from+ for right/left arrows $\to$ and $\from$. Other arrows work on the same naming convention, e.g. $\too$ is \verb+\too+, $\xto[down]{up}$ is \verb+\xto[down]{up}+, $\onto$ is \verb+\onto+, $\into$ is \verb+\into+, $\iso$ is \verb+\iso+, and $\dashto$ is \verb+\dashto+. Add an 'x' to add labels and an 'f' to reverse direction usually, e.g. $\xonto f$ is \verb+\xonto f+, $\finto$ is \verb+\finto+, and $\xfinto g$ is \verb+\xfinto g+, $\xiso f$ is \verb+\xiso f+, $\xdashto[below]g$ is \verb+\xdashto[below]g+, $\xtoto[down]{up}$ is \verb+\xtoto[down]{up}+, and $\fromto$ is \verb+\fromto+
+        \item Many common diagram shapes have commands associated with them (with the arguments generally ordered top to bottom, left to right), see e.g. the code producing these
+        $$\commsquare AfBghCiD\tand\barecommsquare ABCD\tand\mapover XfYpqS$$
+        $$\compdiag AfBgC{g\circ f}\tand\mapwithsect E\pi X\sigma\tand\correspondence ZpqXY\tand\mapdown Xf{\t{flat}}Y$$
+    \end{itemize}
+    \item Symbols and functions
+    \begin{itemize}
+        \item Most symbols/functions that come up should have a command associated with them, e.g. $\Sha$ is \verb+\Sha+, $\Sel$ is \verb+\Sel+, $\Hom$ is \verb+\Hom+, $\eps$ is \verb+\eps+, $\del$ is \verb+\del+, etc. There's also $\rank,\corank,\ord,\Nm,\Cl$ and so on, with expected names.
+        \item I often use \verb+\hom+ for homology $\hom$. If these show up, you can use \verb+\fhom+ and \verb+\ethom+ for $\fhom$ and $\ethom$.
+    \end{itemize}
+    \item Text
+    \begin{itemize}
+        \item You can use \verb+\t+ in place of \verb+\text+ if you want normal text in a displayed equation, for example.
+        \item Many common words have an associated text command of the form \verb+\tWORD+, e.g.
+        $$X=\b{r\in\R:r\ge0\tand r\le5}\tif a=0\tbut X=\b{r\in\R:r<0\tor r>5}\twhen a=1$$
+        is \verb|X=\b{r\in\R:r\ge0\tand r\le5}\tif a=0\tbut X=\b{r\in\R:r<0\tor r>5}\twhen a=1|.
+        \item \verb+\bp{1}+ produces \bp{1}
+    \end{itemize}
+    \item Index and marginal comments
+    \begin{itemize}
+        \item Add marginal comments with \verb+\thought,\question,\answer,\dolater,\remember+ (by default, I use \verb+\thought+). A list of these is at the end of the document
+        \item There's an index at the end. To add something to it, use \verb+\define{blah}+, e.g. \define{ignore this} is now in the index
+    \end{itemize}
+    \item Others
+    \begin{itemize}
+        \item You can use \verb+\mat+ for a $2\by2$ matrix (arguments top left to bottom right), \verb+\Mat+ for a $3\by3$ matrix, and \verb+\MAT+ for a $4\by4$ matrix. You can add a \verb+t+ to the end to get the transpose of the matrix you wrote
+        $$\mat1234\tand\Mat123456789\tand\MAT0123456789ABCDEF\tand\Matt123456789\tand\matt1234$$
+        \item For lists, in addition to \verb+\begin{itemize}+ and \verb+\begin{enumerate}+, there's also \verb+\begin{alphabetize}+ and \verb+\begin{romanize}+
+        \item The legendre symbol is \verb+\legendre pq+, e.g. $\legendre pq$. This also works for the Hilbert symbol: $\legendre{H_n/K}\mfp$ is \verb+\legendre{H_n/K}\mfp+
+        \item You can use \verb+\pull+ and \verb+\push+ to add upper or lower $*$'s (e.g. $\pull f,\push f$), you can use \verb+\inv+ to add an inverse (e.g. $\inv f$), and you can use \verb+\wt+ to add a (wide) tilde (e.g. $\wt f$).
+        \item You can use \verb+\mapdesc{map name}{domain}{codomain}{input}{output}+ is describe a map, e.g.
+        $$\mapdesc fXYx{f(x)}\tor\mapdesc{}ZWzw$$
+        \item You can use \verb+\zmod n+ for $\zmod n$ and \verb+\Zmod n+ for $\Zmod n$
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\section{Playground}
+
 $$\twocommsquare AfBghC{f'}D\alpha\tand\baretwocommsquare XYZW\tand\baretwocommsquare{G\by X}XX{[X/G]}\tand\twocommsquare{\ul\Isom_{\meX(S)}(a,b)}{}S{}{(a,b)}\meX\Delta{\meX\by\meX}{}$$
 
 $$\pullback {X\by_ZY}XfYgZ\tand\pushout {U\cap V}fUgV{U\cup V}\tand\liftsquare AfBghCkD\alpha$$
@@ -28,7 +84,7 @@ $\Sha$ and $\sHom$ and $\sExt$ and $\sEnd$ and $\sLat$
 $$X\Text{and}\sspacing Y_\Qbar$$
 
 \begin{enumerate}
-    \item  $\fintoo$
+    \item  $\fintoo A\xiso fB\xisoo gC$
     \item  $\intoo$
     \item $\xfintoo{y}$
     \begin{alphabetize}
@@ -51,8 +107,8 @@ $$\mat1234\tand\Mat123456789\tand\MAT0123456789ABCDEF\tand\Matt123456789\tand\ma
 
 $$\prescript123$$
 
-One day I'll find a good way to tex rings of formal power and of laurent series...
-$$k\dsq t\tand k\dparens t$$
+One day I'll find a good way to tex rings of formal power series and of laurent series...
+$$k\dsq t,k\dsq{t^{1/p^\infty}}\tand k\dparens t,k\dparens{t^{1/p^\infty}}$$
 
 $G^\Frob$
 \end{document}

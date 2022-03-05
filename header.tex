@@ -243,6 +243,7 @@
 \DeclareMathOperator{\denom}{denom}
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\corank}{corank}
 \DeclareMathOperator{\Fr}{Fr}
 \DeclareMathOperator{\trdeg}{trdeg}
 \DeclareMathOperator{\Tr}{Tr}
@@ -267,6 +268,10 @@
 \DeclareMathOperator{\Art}{Art}
 \DeclareMathOperator{\Spl}{Spl}
 \DeclareMathOperator{\sLat}{\mathscr{L\mkern-4mu}\textit{at}} % script L Lat
+
+%% Arithmetic Dynamics
+\newcommand{\Per}{\opname{Per}}
+\newcommand{\Prep}{\opname{Prep}}
 
 %% Modular Forms/Curves and automorphic stuff
 \newcommand{\sump}{\sideset{}'\sum} % sum prime
@@ -411,6 +416,8 @@
 \newcommand{\CMon}{\mrm{CMon}}
 \newcommand{\PSp}{\mrm{PSp}} % pre-spectra
 \newcommand{\Fun}{\mrm{Fun}} % Functors
+\newcommand{\AV}{\mrm{AV}} % abelian varites
+\newcommand{\Isog}{\mrm{Isog}}
 
 %% Lie Theory
 \newcommand{\dg}{\d g}
@@ -663,12 +670,18 @@
 \newcommand{\mfM}{\mathfrak M}
 \newcommand{\mfs}{\mathfrak s}
 \newcommand{\mbf}{\mathbf}
+\newcommand{\mbfa}{\mathbf a}
+\newcommand{\mbfb}{\mathbf b}
+\newcommand{\mbfc}{\mathbf c}
 \newcommand{\mbfx}{\mathbf x}
 \newcommand{\mbfy}{\mathbf y}
 \newcommand{\mbfz}{\mathbf z}
 \newcommand{\mbfi}{\mathbf i}
 \newcommand{\mbfj}{\mathbf j}
 \newcommand{\mbfk}{\mathbf k}
+\newcommand{\mbfm}{\mathbf m}
+\newcommand{\mbfn}{\mathbf n}
+\newcommand{\mbfd}{\mathbf d}
 \newcommand{\mbfe}{\mathbf e}
 \newcommand{\mbff}{\mathbf f}
 \newcommand{\mbfh}{\mathbf h}
@@ -732,6 +745,7 @@
 \newcommand{\mcL}{\mc L}
 \newcommand{\mcC}{\mc C}
 \newcommand{\mrm}{\mathrm}
+\newcommand{\opname}{\operatorname}
 \newcommand{\Lam}{\Lambda}
 %\renewcommand{\S}{\mathbb S}
 \newcommand{\F}{\mathbb F}
@@ -779,7 +793,6 @@
 
 
 %% Grouping Operators
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\parens}[1]{\left(#1\right)}
 \newcommand{\p}[1]{\left(#1\right)}
@@ -798,18 +811,20 @@
 %% Arrows
 \newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
 \newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
+\newcommand{\mapstoo}{\longmapsto}
 \newcommand{\from}{\leftarrow}
 \newcommand{\fromm}{\longleftarrow}
+\newcommand{\xfromm}{\xlongleftarrow}
 \newcommand{\xto}{\xrightarrow}
 \newcommand{\xfrom}{\xleftarrow}
 \newcommand{\too}{\longrightarrow}
 \newcommand{\xtoo}{\xlongrightarrow}
 \newcommand{\iso}{\xto\sim}
 \newcommand{\isoo}{\xtoo\sim}
-\newcommand{\xiso}[1]{\overset{#1}\iso}
-\newcommand{\xisoo}[1]{\overset{#1}\isoo}
+\newcommand{\xiso}[1]{\xto[#1]\sim}
+\newcommand{\xisoo}[1]{\underset{#1}\isoo}
 \newcommand{\fiso}{\xfrom\sim}
-\newcommand{\xfiso}[1]{\overset{#1}\fiso}
+\newcommand{\xfiso}[1]{\xfrom[#1]\sim}
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\xinto}[1]{\overset{#1}\into}
 \newcommand{\finto}{\hookleftarrow}
@@ -962,12 +977,6 @@
 		&\displaystyle#4&\longmapsto&\displaystyle #5
 	\end{matrix}
 }
-%\newcommand{\mapdesc}[5]{
-%    \begin{alignat}{3}
-%        \ifblank{#1}{}{#1:} &#2 &&\longrightarrow &&#3\\
-%        &#4 &&\longmapsto &&#5
-%    \end{alignat}
-%}
 \renewcommand{\div}{\operatorname{div}} % Might regret this one day
 \newcommand*{\cube}{\mbox{\mancube}}
 \DeclareMathOperator{\sign}{sign}
@@ -1009,12 +1018,16 @@
 \newcommand{\tthen}{\,\text{ then }\,}
 \newcommand{\tvia}{\,\text{ via }\,}
 \newcommand{\tforall}{\,\text{ for all }\,}
+\newcommand{\tforalmostall}{\,\text{ for almost all }\,}
 \newcommand{\tforany}{\,\text{ for any }\,}
 \newcommand{\tforsome}{\,\text{ for some }\,}
 \newcommand{\tsince}{\,\text{ since }\,}
 \newcommand{\totherwise}{\,\text{ otherwise }\,}
 \newcommand{\texists}{\,\text{ exists }\,}
+\newcommand{\tsuchthat}{\,\text{ such that }\,}
+\newcommand{\tandso}{\,\text{ and so }\,}
 \renewcommand\t\text % Not sure if I want to keep this (Update: I do)
+\newcommand\ttt\texttt
 
 %% Marginal Notes
 \newcommand{\confusion}[1]{\todo[color=red!70]{#1}}
@@ -1034,7 +1047,7 @@
 \newcommand{\define}[1]{\emphasize{#1}\index{#1}}
 \newcommand{\Define}[2]{\emphasize{#1}\index{#2}}
 
-%% Formatting
+%% Formatting (probably get rid of this at some point)
 \newcommand{\Section}[1]{\newpage\section{#1}}
 \newcommand{\Subsection}[1]{\newpage\subsection{#1}}
 \newcommand{\Subusbsection}[1]{\newpage\subsubsection{#1}}
@@ -1144,6 +1157,7 @@
 \newtheorem*{fact}{Fact}
 \newtheorem*{ex}{Example}
 \newtheorem*{assump}{Assumption}
+\newtheorem*{simpassump}{Simplifying Assumption}
 \newtheorem*{intuition}{Intuition}
 \newtheorem*{princex}{Principal Example}
 \newtheorem*{nonex}{Non-example}
@@ -1153,6 +1167,7 @@
 \newtheorem*{resp}{Response}
 \newtheorem*{hist}{History}
 \newtheorem*{appl}{Application}
+\newtheorem*{imrem}{Important Remark}
 
 \theoremstyle{remark}
 \newtheorem{rem}[thm]{Remark}

@@ -14,7 +14,7 @@
 \usepackage{imakeidx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{upgreek}
-\usepackage{hyperref}
+\usepackage[pagebackref=true]{hyperref} % pagebackref automatically add backlinks in bibliography
 \usepackage{mdframed}
 \usepackage{pgfplots}
 \usepackage{manfnt}
@@ -118,7 +118,7 @@
 \newcommand{\units}[1]{#1^{\times}}
 \newcommand{\punits}[1]{\units{\parens{#1}}}
 \newcommand{\zunits}[1]{\punits{\zmod{#1}}}
-\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\inv}[2][1]{#2^{-#1}}
 \newcommand{\pinv}[1]{\inv{\parens{#1}}}
 \newcommand{\sinv}{\inv S}
 \newcommand{\odd}[1]{#1^{\mrm{odd}}}
@@ -190,6 +190,7 @@
 \DeclareMathOperator{\Mod}{Mod}
 \DeclareMathOperator{\CAlg}{Calg}
 \DeclareMathOperator{\Alg}{Alg}
+\DeclareMathOperator{\Ring}{Ring}
 \DeclareMathOperator{\Irr}{Irr} % Do I want a separate section for representation theory?
 \DeclareMathOperator{\Irrep}{Irrep}
 
@@ -416,7 +417,7 @@
 \newcommand{\CMon}{\mrm{CMon}}
 \newcommand{\PSp}{\mrm{PSp}} % pre-spectra
 \newcommand{\Fun}{\mrm{Fun}} % Functors
-\newcommand{\AV}{\mrm{AV}} % abelian varites
+\newcommand{\AV}{\mrm{AV}} % abelian varieties
 \newcommand{\Isog}{\mrm{Isog}}
 
 %% Lie Theory
@@ -436,6 +437,7 @@
 %\newcommand{\U}{\operatorname{U}}
 \newcommand{\SU}{\operatorname{SU}}
 \newcommand{\PSU}{\operatorname{PSU}}
+\newcommand{\GU}{\opname{GU}}
 \DeclareMathOperator{\Lie}{Lie}
 \newcommand{\ad}{\mathrm{ad}}
 \DeclareMathOperator{\Ad}{Ad}
@@ -469,7 +471,7 @@
 \newcommand{\bdel}{\bar\del}
 \DeclareMathOperator{\height}{ht}
 \DeclareMathOperator{\Spec}{\mbf{Spec}}
-\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\spec}{Spec}
 \DeclareMathOperator{\Proj}{Proj}
 \DeclareMathOperator{\rProj}{\mbf{Proj}} % relative Proj
 \DeclareMathOperator{\PAb}{PAb}
@@ -697,6 +699,7 @@
 \newcommand{\msA}{\mathscr A}
 \newcommand{\msB}{\mathscr B}
 \newcommand{\msC}{\mathscr C}
+\newcommand{\msD}{\mathscr D}
 \newcommand{\msK}{\mathscr K}
 \newcommand{\msCC}{\msC\msC}
 \newcommand{\msFG}{\msF\msG}
@@ -706,6 +709,7 @@
 \newcommand{\msL}{\ms L}
 \newcommand{\msM}{\ms M}
 \newcommand{\msN}{\ms N}
+\newcommand{\msQ}{\ms Q}
 \newcommand{\msV}{\ms V}
 \newcommand{\msW}{\ms W}
 \newcommand{\msX}{\ms X}
@@ -734,9 +738,12 @@
 \newcommand{\mcZ}{\mc Z}
 \newcommand{\mfa}{\mf a}
 \newcommand{\mfb}{\mf b}
+\newcommand{\mfA}{\mf A}
+\newcommand{\mfC}{\mf C}
 \newcommand{\mbb}{\mathbb}
 \newcommand{\msR}{\ms R}
 \newcommand{\msS}{\ms S}
+\newcommand{\msT}{\ms T}
 \newcommand{\mcH}{\mc H}
 \newcommand{\mcG}{\mc G}
 \newcommand{\mcS}{\mc S}
@@ -754,11 +761,13 @@
 \newcommand{\R}{\mathbb R}
 \newcommand{\C}{\mathbb C}
 \newcommand{\E}{\mathbb E}
+\newcommand{\M}{\mathbb M}
 \newcommand{\N}{\mathbb N}
 \newcommand{\T}{\mathbb T}
 \newcommand{\A}{\mathbb A}
 \newcommand{\G}{\mathbb G}
 \newcommand{\K}{\mathbb K}
+\newcommand{\D}{\mathbb D}
 \renewcommand{\H}{\mathbb H}
 \newcommand{\I}{\mathbb I}
 \newcommand{\eps}{\varepsilon}
@@ -793,6 +802,7 @@
 
 
 %% Grouping Operators
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\parens}[1]{\left(#1\right)}
 \newcommand{\p}[1]{\left(#1\right)}
@@ -804,13 +814,14 @@
 \newcommand{\sq}{\sqbracks}
 \newcommand{\angles}[1]{\left\langle#1\right\rangle}
 \newcommand{\coint}[2]{\left[#1,#2\right)} % Closed, open interval
-\newcommand{\dsqbracks}[1]{\left\llbracket#1\right\rrbracket}
+\newcommand{\dsqbracks}[1]{\!\left\llbracket#1\right\rrbracket}
 \newcommand{\dsq}{\dsqbracks}
-\newcommand{\dparens}[1]{\p{\!\p{#1}\!}}
+\newcommand{\dparens}[1]{\!\left(\!\left(#1\right)\!\right)}
+\newcommand\dps\dparens % \dp already defined
 
 %% Arrows
-\newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}
-\newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
+%\newcommand{\xlongleftarrow}[1]{\overset{#1}{\longleftarrow}}   % apparently already defined (in overleaf, use "TeX Live Version" >= 2022)
+%\newcommand{\xlongrightarrow}[1]{\overset{#1}{\longrightarrow}}
 \newcommand{\mapstoo}{\longmapsto}
 \newcommand{\from}{\leftarrow}
 \newcommand{\fromm}{\longleftarrow}
@@ -917,6 +928,8 @@
   \reflectbox{$\m@th#1\rightsquigarrow$}%
 }
 \makeatother
+\newcommand{\sqigto}{\rightsquigarrow}
+\newcommand{\squigfrom}{\leftsquigarrow}
 
 %% Misc
 \newcommand{\Avg}[0]{\operatorname{Avg}}
@@ -1017,6 +1030,7 @@
 \newcommand{\tcomma}{\text{, }\,\,}
 \newcommand{\tthen}{\,\text{ then }\,}
 \newcommand{\tvia}{\,\text{ via }\,}
+\newcommand{\tforeach}{\,\text{ for each }\,}
 \newcommand{\tforall}{\,\text{ for all }\,}
 \newcommand{\tforalmostall}{\,\text{ for almost all }\,}
 \newcommand{\tforany}{\,\text{ for any }\,}
@@ -1053,7 +1067,7 @@
 \newcommand{\Subusbsection}[1]{\newpage\subsubsection{#1}}
 
 %% Randomness
-\pgfmathdeclarerandomlist{thuses}{{Thus}{Therefore}{As such}{As we wished}{By this great fortune}{Alors}{Donc}{Following this thread}{Consequently}{Thusforth}{Rejoice}{This can only mean one thing...}{Ergo}}
+\pgfmathdeclarerandomlist{thuses}{{Thus}{Therefore}{As such}{As we wished}{By this great fortune}{Alors}{Donc}{Following this thread}{Consequently}{Thusforth}{Rejoice}{This can only mean one thing...}{Ergo}{Voila}}
 \newcommand\Thus{\pgfmathrandomitem\z{thuses}\z}
 \pgfmathdeclarerandomlist{fibers}{{fiber}{fibre}}
 \newcommand\fibre{\pgfmathrandomitem\z{fibers}\z\,}
@@ -1148,36 +1162,41 @@
 \renewcommand\thecexc{\Alph{cexc}}
 
 \theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition}
+\newtheorem{defninner}[thm]{Definition}
 \newtheorem{cond}[thm]{Conditions}
 \newtheorem{notn}[thm]{Notation}
 \newtheorem{anotn}[thm]{Abuse of Notation}
 \newtheorem{san}[thm]{Sanity Check}
-\newtheorem{rec}[thm]{Recall}
+\newtheorem{recinner}[thm]{Recall}
+\newtheorem{set}[thm]{Setup}
 \newtheorem*{fact}{Fact}
-\newtheorem*{ex}{Example}
+\newtheorem*{exinner}{Example}
 \newtheorem*{assump}{Assumption}
 \newtheorem*{simpassump}{Simplifying Assumption}
 \newtheorem*{intuition}{Intuition}
 \newtheorem*{princex}{Principal Example}
-\newtheorem*{nonex}{Non-example}
-\newtheorem{warn}[thm]{Warning}
+\newtheorem*{nonexinner}{Non-example}
+\newtheorem{warninner}[thm]{Warning}
 \newtheorem*{slogan}{Slogan}
-\newtheorem*{ans}{Answer}
+\newtheorem*{ansinner}{Answer}
 \newtheorem*{resp}{Response}
 \newtheorem*{hist}{History}
 \newtheorem*{appl}{Application}
 \newtheorem*{imrem}{Important Remark}
+\newtheorem*{conf}{Confusion}
+\newtheorem*{uconf}{Unimportant Confusion}
+\newtheorem*{upshot}{Upshot}
 
 \theoremstyle{remark}
-\newtheorem{rem}[thm]{Remark}
+\newtheorem{reminner}[thm]{Remark}
+\newtheorem{urem}[thm]{Unimportant Remark}
 \newtheorem{construct}[thm]{Construction}
 \newtheorem{obs}[thm]{Observation}
+\newtheorem{pic}[thm]{Picture}
 \newtheorem{note}{Note}
 \newtheorem*{counterex}{Counterexample}
 \newtheorem*{exc}{Exercise}
 \newtheorem*{mor}{Moral}
-\newtheorem*{set}{Setup}
 \newtheorem*{expln}{Explanation}
 \newtheorem*{descrip}{Description}
 \newtheorem*{mot}{Motivation}
@@ -1185,5 +1204,32 @@
 \newtheorem*{conv}{Convention}
 \newtheorem*{plan}{Plan}
 \newtheorem*{comp}{Computation}
+\newtheorem*{idea}{Idea}
 
-\renewcommand{\qedsymbol}{$\blacksquare$}
+%% https://tex.stackexchange.com/questions/16453/denoting-the-end-of-example-remark
+\newcommand\exsymbol{$\triangle$}
+\newcommand\remsymbol{$\circ$}
+\newcommand\anssymbol{$\star$}
+\newcommand\warnsymbol{$\bullet$}
+\newcommand\proofsymbol{$\blacksquare$}
+\newcommand\nonexsymbol{$\triangledown$}
+\newcommand\recsymbol{$\odot$}
+\newcommand\defnsymbol{$\diamond$}
+
+\newenvironment{ex}[1][]{\begin{exinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\exsymbol}{\popQED\end{exinner}}
+\newenvironment{rem}[1][]{\begin{reminner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\remsymbol}{\popQED\end{reminner}}
+\newenvironment{ans}[1][]{\begin{ansinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\anssymbol}{\popQED\end{ansinner}}
+\newenvironment{warn}[1][]{\begin{warninner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\warnsymbol}{\popQED\end{warninner}}
+\newenvironment{nonex}[1][]{\begin{nonexinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\nonexsymbol}{\popQED\end{nonexinner}}
+\newenvironment{rec}[1][]{\begin{recinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\recsymbol}{\popQED\end{recinner}}
+\newenvironment{defn}[1][]{\begin{defninner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\defnsymbol}{\popQED\end{defninner}}
+
+
+%https://tex.stackexchange.com/questions/291235/modifying-an-existing-environment-but-keeping-the-name
+\let\proofinner=\proof
+%https://tex.stackexchange.com/questions/49056/optional-arguments-in-def
+%\NewDocumentCommand{\myproof}{O{}}{\proofinner[#1]\renewcommand{\qedsymbol}{\proofsymbol}}
+\newcommand\myproof[1][Proof]{\proofinner[#1]\renewcommand\qedsymbol\proofsymbol}
+\def\proof{\myproof}
+
+%\renewcommand{\qedsymbol}{$\blacksquare$}

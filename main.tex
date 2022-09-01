@@ -59,7 +59,7 @@
         $$\mat1234\tand\Mat123456789\tand\MAT0123456789ABCDEF\tand\Matt123456789\tand\matt1234$$
         \item For lists, in addition to \verb+\begin{itemize}+ and \verb+\begin{enumerate}+, there's also \verb+\begin{alphabetize}+ and \verb+\begin{romanize}+
         \item The legendre symbol is \verb+\legendre pq+, e.g. $\legendre pq$. This also works for the Hilbert symbol: $\legendre{H_n/K}\mfp$ is \verb+\legendre{H_n/K}\mfp+
-        \item You can use \verb+\pull+ and \verb+\push+ to add upper or lower $*$'s (e.g. $\pull f,\push f$), you can use \verb+\inv+ to add an inverse (e.g. $\inv f$), and you can use \verb+\wt+ to add a (wide) tilde (e.g. $\wt f$).
+        \item You can use \verb+\pull+ and \verb+\push+ to add upper or lower $*$'s (e.g. $\pull f,\push f$), you can use \verb+\inv+ to add an inverse (e.g. $\inv f$), you can use \verb+\inv[k]+ to add a $-k$ exponent (e.g. $\inv[k] f$), and you can use \verb+\wt+ to add a (wide) tilde (e.g. $\wt f$).
         \item You can use \verb+\mapdesc{map name}{domain}{codomain}{input}{output}+ is describe a map, e.g.
         $$\mapdesc fXYx{f(x)}\tor\mapdesc{}ZWzw$$
         \item You can use \verb+\zmod n+ for $\zmod n$ and \verb+\Zmod n+ for $\Zmod n$
@@ -96,6 +96,7 @@ $$X\Text{and}\sspacing Y_\Qbar$$
         \item $A \tofrom B\xtoto[abcd]{efgh}C$
         \item $A\onto B\fonto C\xonto fD\xfonto gE\xdashto hF\xdashfrom[below]gG$
     \end{alphabetize}
+    \item $\xlongrightarrow{\t{long test}}$
 \end{enumerate}
 $$\begin{ytableau}
     5 & 3\\
@@ -111,4 +112,44 @@ One day I'll find a good way to tex rings of formal power series and of laurent 
 $$k\dsq t,k\dsq{t^{1/p^\infty}}\tand k\dparens t,k\dparens{t^{1/p^\infty}}$$
 
 $G^\Frob$
+
+\begin{ex}
+    nested test
+    \begin{rem}[stuff]
+        test again
+        \begin{proof}[Proof Test]
+            begin proof
+            \begin{ans}[Parenthetical]
+                begin ans.
+                \begin{warn}[I probably didn't need to do this on all of them]
+                    begin warn
+                    \begin{nonex}
+                        begin nonex
+                        \begin{defn}
+                            begin defn
+                            \begin{rec}[This is a bit excessive maybe]
+                                begin rec
+                                
+                                end rec
+                            \end{rec}
+                            end defn
+                        \end{defn}
+                        end nonex
+                    \end{nonex}
+                    end warn
+                \end{warn}
+                end ans.
+            \end{ans}
+            end proof.
+        \end{proof}
+        end remark
+    \end{rem}
+    end example
+\end{ex}
+\begin{ex}
+    \begin{align*}
+        \bs\t{qedhere test} &\qedhere
+    \end{align*}
+\end{ex}
+
 \end{document}

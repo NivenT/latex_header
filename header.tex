@@ -1,5 +1,7 @@
-\usepackage[onehalfspacing]{setspace}
+\usepackage{setspace} 
+\setstretch{1.135} % Use \singlespacing,\onehalfspacing, or \setstretch{blah} to change this
 \usepackage{geometry} % Used to include [margin=0.6in], but that's dumb to have here. Use \geometry{margin=blah} in your document to set margin length
+\usepackage[dvipsnames]{xcolor}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -14,7 +16,11 @@
 \usepackage{imakeidx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{upgreek}
-\usepackage[pagebackref=true]{hyperref} % pagebackref automatically add backlinks in bibliography
+\usepackage[pagebackref]{hyperref} % pagebackref automatically add backlinks in bibliography
+\hypersetup{colorlinks=true, linkcolor=., citecolor=ForestGreen, urlcolor=blue}
+\usepackage[capitalise, nameinlink]{cleveref}
+\crefformat{equation}{(#2#1#3)} % No 'Eq.' or 'Equation' before equation references
+%\crefformat{exinner}{#1#2}
 \usepackage{mdframed}
 \usepackage{pgfplots}
 \usepackage{manfnt}
@@ -28,6 +34,18 @@
 \usepackage{blkarray}
 \usepackage{mathtools}
 \usepackage{verbatim}
+\usepackage{wasysym}
+
+% This is evil, but it works.
+% This way references get colored, but other links do not (e.g. in the list of marginal comments)
+\newcommand\linkcolor{BrickRed}
+\let\crefinner=\cref
+\newcommand\mycref[1]{{\color{\linkcolor}\crefinner{#1}}}
+\def\cref{\mycref}
+\let\refinner=\ref
+\newcommand\myref[1]{{\color{\linkcolor}\refinner{#1}}}
+\def\ref{\myref}
+
 
 % https://tex.stackexchange.com/questions/69085/two-different-calligraphic-font-styles-in-math-mode
 % calrsfs messes with mathcal. This makes pazocal what mathcal usually is
@@ -84,6 +102,12 @@
 \allowdisplaybreaks
 %\linespread{1.272}  % sqrt(golden ratio) for aesthetic reasons
 
+% Have tikzcd place all notes in \displaystyle
+% https://tex.stackexchange.com/questions/446613/can-tikzcd-nodes-be-placed-automatically-in-displaystyle
+\tikzcdset{
+  cells={font=\everymath\expandafter{\the\everymath\displaystyle}},
+}
+
 %% Below are very ill-defined categories
 
 %% Linear Algebra
@@ -99,9 +123,12 @@
 % Latex commands can only take 9 arguments, so need to cheat with a helper command to support > 9 args
 \newcommand{\MAT}[7]{\begin{pmatrix}{#1}&{#2}&{#3}&{#4}\\{#5}&{#6}&{#7}&\MATHelper}
 \newcommand{\MATHelper}[9]{{#1}\\{#2}&{#3}&{#4}&{#5}\\{#6}&{#7}&{#8}&{#9}\end{pmatrix}}
+\newcommand{\Matrix}[7]{\begin{pmatrix}{#1}&{#2}&{#3}&{#4}&{#5}\\{#6}&{#7}&\MatrixHelper}
+\newcommand{\MatrixHelper}[9]{{#1}&{#2}&{#3}\\{#4}&{#5}&{#6}&{#7}&{#8}\\{#9}&\MatrixHelperii}
+\newcommand{\MatrixHelperii}[9]{{#1}&{#2}&{#3}&{#4}\\{#5}&{#6}&{#7}&{#8}&{#9}\end{pmatrix}}
 \newcommand{\Wedge}{\bigwedge\nolimits}
 \newcommand{\topwedge}{\Wedge^{\mrm{top}}}
-\newcommand{\Span}[1]{\t{span}\b{#1}}
+\newcommand{\Span}[1]{\opname{span}\b{#1}}
 \newcommand{\dual}[1]{#1^\vee}
 \newcommand{\pdual}[1]{\p{#1}^\vee}
 \DeclareMathOperator{\spn}{span}
@@ -112,14 +139,15 @@
 
 %% Abstract Algebra
 \newcommand{\gen}[1]{\left\langle #1 \right\rangle}
-\newcommand{\pres}[2]{\left\langle #1\left| #2 \right.\right\rangle}
+\newcommand{\pres}[2]{\left\langle #1\,\left|\, #2 \right.\right\rangle}
 \newcommand{\op}[0]{^\text{op}}
 \newcommand{\freemod}[0]{R^{\oplus S}}
 \newcommand{\units}[1]{#1^{\times}}
 \newcommand{\punits}[1]{\units{\parens{#1}}}
 \newcommand{\zunits}[1]{\punits{\zmod{#1}}}
 \newcommand{\inv}[2][1]{#2^{-#1}}
-\newcommand{\pinv}[1]{\inv{\parens{#1}}}
+\newcommand{\pinv}[2][1]{\inv[#1]{\parens{#2}}}
+\newcommand{\sqinv}[2][1]{\inv[#1]{\sq{#2}}}
 \newcommand{\sinv}{\inv S}
 \newcommand{\odd}[1]{#1^{\mrm{odd}}}
 \newcommand{\invlim}{\varprojlim\limits}
@@ -127,26 +155,6 @@
 \newcommand{\colim}{\operatorname{colim}}
 \newcommand{\holim}{\operatorname{holim}}
 \newcommand{\hocolim}{\operatorname{hocolim}}
-\newcommand{\ses}[5]{
-	\begin{tikzcd}[ampersand replacement=\&]
-		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
-	\end{tikzcd}
-}
-\newcommand{\scmplx}[5]{ % single complex
-	\begin{tikzcd}[ampersand replacement=\&]
-		#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5
-	\end{tikzcd}
-}
-\newcommand{\lses}[5]{
-	\begin{tikzcd}[ampersand replacement=\&]
-		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5
-	\end{tikzcd}
-}
-\newcommand{\rses}[5]{
-	\begin{tikzcd}[ampersand replacement=\&]
-		#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
-	\end{tikzcd}
-}
 \newcommand{\ab}[1]{#1^{\mathrm{ab}}}
 \newcommand{\un}[1]{#1^{\mrm{un}}}
 \newcommand{\ur}[1]{#1^{\mrm{ur}}}
@@ -154,6 +162,7 @@
 \newcommand{\normal}{\triangleleft}
 \newcommand{\irr}[1]{#1^{\mrm{irr}}} 
 \newcommand{\inn}{\operatorname{inn}}
+\newcommand{\ctsHom}{\Hom_{\mrm{cts}}}
 \DeclareMathOperator{\image}{image}
 \DeclareMathOperator{\Hom}{Hom}	
 \DeclareMathOperator{\Sur}{Sur}
@@ -178,6 +187,7 @@
 \DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Ext}{Ext}
 \renewcommand{\hom}{\operatorname H}
+\newcommand{\homR}{\mathrm R}
 \DeclareMathOperator{\ZG}{\Z G}
 \DeclareMathOperator{\sat}{sat}
 \DeclareMathOperator{\Torsion}{Torsion}
@@ -188,11 +198,13 @@
 \DeclareMathOperator{\ob}{ob}
 \DeclareMathOperator{\Mor}{Mor}
 \DeclareMathOperator{\Mod}{Mod}
-\DeclareMathOperator{\CAlg}{Calg}
+\DeclareMathOperator{\CAlg}{CAlg}
 \DeclareMathOperator{\Alg}{Alg}
 \DeclareMathOperator{\Ring}{Ring}
 \DeclareMathOperator{\Irr}{Irr} % Do I want a separate section for representation theory?
 \DeclareMathOperator{\Irrep}{Irrep}
+\DeclareMathOperator{\AlgGrp}{AlgGrp}
+\DeclareMathOperator{\LieAlg}{LieAlg}
 
 %% Algebraic Number Theory/Field Theory
 \newcommand{\qadj}[1]{\mathbb Q\left(#1\right)}
@@ -294,6 +306,10 @@
 %% p-adic stuff
 \newcommand{\caret}[1]{{#1}^{\wedge}}
 \newcommand{\val}{\operatorname{val}}
+\newcommand{\crisB}{B_{\t{cris}}}
+\newcommand{\dRB}{B_{\t{dR}}}
+\newcommand{\crisD}{D_{\t{cris}}}
+\newcommand{\dRD}{D_{\t{dR}}}
 \DeclareMathOperator{\LA}{LA}
 \DeclareMathOperator{\Coh}{Coh}
 \DeclareMathOperator{\ctensor}{\wh\otimes} % complete tensor
@@ -459,12 +475,18 @@
 \newcommand{\tet}{\text{\'et}} % text et
 \newcommand{\et}[1]{#1_{\text{\'et}}}
 \newcommand{\bet}[1]{#1_{\text{\'Et}}} % big etale
+\newcommand{\liset}[1]{#1_{\opname{lis-\acute et}}} % lisse-etale
 \newcommand{\etH}{\operatorname H_{\text{\'et}}}
 \newcommand{\ethom}{\operatorname H_{\text{\'et}}}
 \newcommand{\etpi}{\pi^{\text{\'et}}}
-\newcommand{\fppf}[1]{#1_{\text{fppf}}} % Note sure if this (and \bfppf) are good inclusions
-\newcommand{\bfppf}[1]{#1_{\text{Fppf}}}
-\newcommand{\fhom}{\operatorname H_{\text{fppf}}}
+\newcommand{\lehomR}{\homR_{\opname{lis-\acute et}}}
+\newcommand{\lisethomR}{\lehomR}
+\newcommand{\fppf}[1]{#1_{\mathrm{fppf}}} % Note sure if this (and \bfppf) are good inclusions % Update: probably they're not
+\newcommand{\bfppf}[1]{#1_{\mrm{Fppf}}}
+\newcommand{\fhom}{\operatorname H_{\mathrm{fppf}}}
+\newcommand{\fhomR}{\homR_{\mathrm{fppf}}}
+\newcommand{\mhom}{\opname H_{\mathrm{mot}}}
+\newcommand{\dhom}{\opname H_{\mrm{dR}}}
 \newcommand{\Hur}{\mrm{Hur}}
 \newcommand{\Hilb}{\mrm{Hilb}}
 \newcommand{\Quot}{\mrm{Quot}}
@@ -497,6 +519,7 @@
 \DeclareMathOperator{\Sm}{Sm}
 \DeclareMathOperator{\Psh}{Psh}
 \DeclareMathOperator{\Sh}{Sh}
+%\DeclareMathOperator{\CH}{CH}
 
 %% A1 Homotopy Theory
 \DeclareMathOperator{\GW}{GW}
@@ -643,6 +666,81 @@
     \end{tikzcd}
 }
 \newcommand{\baregaloisdiamond}[4]{\galoisdiamond{#1}{}{}{#2}{#3}{}{}{#4}}
+\newcommand\homses[4]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        0\ar[r]\&{\displaystyle #1}\ar[r, "{#2}"]\ar[r]\&{\displaystyle #3}\ar[r, "{#4}"]\&
+        \homsesHELPER
+}
+\newcommand\homsesHELPER[9]{
+        {\displaystyle #1}\ar[r]\& 0\\
+        0\ar[r]\&{\displaystyle #5}\ar[r, "{#6}"]\&{\displaystyle #7}\ar[r, "{#8}"]\&{\displaystyle #9}\ar[r]\& 0
+        \ar[from=lllu, to=lll, "{#2}"]\ar[from=llu, to=ll, "{#3}"]\ar[from=lu, to=l, "{#4}"]
+    \end{tikzcd}
+}
+\newcommand\topcorner[5]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        {\displaystyle #1}\ar[r, "{#2}"]\ar[d, "{#4}"']\&{\displaystyle #3}\\
+        {\displaystyle #5}
+    \end{tikzcd}
+}
+\newcommand\botcorner[5]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        \&{\displaystyle#1}\ar[d, "{#2}"]\\
+        {\displaystyle#3}\ar[r, "{#4}"']\&{\displaystyle#5}
+    \end{tikzcd}
+}
+\newcommand\conediag[6]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        \&{\displaystyle#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
+        {\displaystyle#4}\ar[rr, "{#5}"']\&\&{\displaystyle#6}
+    \end{tikzcd}
+}
+\newcommand\midtwosimplex[6]{
+    \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={dash}]
+        \&{\displaystyle#1}\ar[dl, "{#2}"']\ar[dr, "{#3}"]\\
+        {\displaystyle#4}\ar[rr, "{#5}"']\&\&{\displaystyle#6}
+    \end{tikzcd}
+}
+\newcommand\frontthreesimplex[1]{
+    \begin{tikzcd}[every arrow/.append style={dash}, ampersand replacement=\&, row sep = large]
+        \&{\displaystyle#1}
+        \frontthreesimplexHELPER
+}
+\newcommand\frontthreesimplexHELPER[9]{
+        \ar[ddl, "{#1}"']\ar[d, "{#2}" description]\ar[ddr, "{#3}"]\\
+        \&{\displaystyle#4}\ar[dl, "{#5}"]\ar[dr, "{#6}"']\\
+        {\displaystyle#7}\ar[rr, "{#8}"']\&\&{\displaystyle#9}
+    \end{tikzcd}
+}
+\newcommand\extensiondiag[6]{
+    \begin{tikzcd}[ampersand replacement=\&]
+        {\displaystyle#1}\ar[r, "{#2}"]\ar[d, "{#4}"']\&{\displaystyle#3}\\
+        {\displaystyle#5}\ar[ur, dashed, "{#6}"']
+    \end{tikzcd}
+}
+
+\iffalse
+\newcommand{\ses}[5]{
+	\begin{tikzcd}[ampersand replacement=\&]
+		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
+	\end{tikzcd}
+}
+\newcommand{\scmplx}[5]{ % single complex
+	\begin{tikzcd}[ampersand replacement=\&]
+		#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5
+	\end{tikzcd}
+}
+\newcommand{\lses}[5]{
+	\begin{tikzcd}[ampersand replacement=\&]
+		0\arrow[r]\&#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5
+	\end{tikzcd}
+}
+\newcommand{\rses}[5]{
+	\begin{tikzcd}[ampersand replacement=\&]
+		#1\arrow[r, "#2"]\&#3\arrow[r, "#4"]\&#5\arrow[r]\&0
+	\end{tikzcd}
+}
+\fi
 
 %% Limit type things
 
@@ -689,6 +787,9 @@
 \newcommand{\mbfh}{\mathbf h}
 \newcommand{\mbfU}{\mathbf U}
 \newcommand{\mbfV}{\mathbf V}
+\newcommand{\mbfD}{\mathbf D}
+\newcommand{\mbfI}{\mathbf I}
+\newcommand{\mbfG}{\mathbf G}
 \newcommand{\msO}{\mathscr O}
 \newcommand{\mscr}{\mathscr}
 \newcommand{\mf}{\mathfrak}
@@ -713,6 +814,8 @@
 \newcommand{\msV}{\ms V}
 \newcommand{\msW}{\ms W}
 \newcommand{\msX}{\ms X}
+\newcommand{\msY}{\ms Y}
+\newcommand{\msZ}{\ms Z}
 \newcommand{\ms}{\mathscr}
 \newcommand{\msU}{\ms U}
 \newcommand{\mfq}{\mf q}
@@ -740,6 +843,7 @@
 \newcommand{\mfb}{\mf b}
 \newcommand{\mfA}{\mf A}
 \newcommand{\mfC}{\mf C}
+\newcommand\mfS{\mf S}
 \newcommand{\mbb}{\mathbb}
 \newcommand{\msR}{\ms R}
 \newcommand{\msS}{\ms S}
@@ -770,6 +874,7 @@
 \newcommand{\D}{\mathbb D}
 \renewcommand{\H}{\mathbb H}
 \newcommand{\I}{\mathbb I}
+\newcommand\V{\mathbb V}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\vphi}{\varphi}
 \renewcommand{\tau}{\uptau}
@@ -786,8 +891,13 @@
 \newcommand{\meF}{\me F}
 \newcommand{\meG}{\me G}
 \newcommand{\meH}{\me H}
+\newcommand{\meI}{\me I}
+\newcommand{\meJ}{\me J}
+\newcommand{\meK}{\me K}
+\newcommand{\meL}{\me L}
 \newcommand{\meM}{\me M}
 \newcommand{\meN}{\me N}
+\newcommand{\meO}{\me O}
 \newcommand{\meP}{\me P}
 \newcommand{\meQ}{\me Q}
 \newcommand{\meR}{\me R}
@@ -804,13 +914,13 @@
 %% Grouping Operators
 \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\parens}[1]{\left(#1\right)}
-\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\parens}[1]{\!\left(#1\right)}
+\newcommand{\p}[1]{\!\left(#1\right)} % I'm not sure if I want this \! there...
 \newcommand{\pfrac}[2]{\parens{\frac{#1}{#2}}}
 \newcommand{\brackets}[1]{\left\{#1\right\}}
 \newcommand{\bracks}[1]{\brackets{#1}}
 \renewcommand{\b}{\bracks} % hopefully I never need a bar under accent
-\newcommand{\sqbracks}[1]{\left[#1\right]}
+\newcommand{\sqbracks}[1]{\!\left[#1\right]} % I'm not sure if I want this \! there...
 \newcommand{\sq}{\sqbracks}
 \newcommand{\angles}[1]{\left\langle#1\right\rangle}
 \newcommand{\coint}[2]{\left[#1,#2\right)} % Closed, open interval
@@ -856,6 +966,8 @@
 \newcommand{\biij}{\longleftrightarrow}
 \newcommand{\longbij}{\biij}
 \newcommand{\xbij}[1]{\overset{#1}\bij}
+\newcommand{\squigto}{\rightsquigarrow}
+%\newcommand{\squigfrom}{\leftsquigarrow}
 \newcommand{\dashto}{\dashrightarrow}
 % https://tex.stackexchange.com/questions/136772/dotted-or-dashed-xrightarrow/136777#136777
 \makeatletter
@@ -912,12 +1024,14 @@
 \makeatother
 \newcommand\xdashto\xdashrightarrow
 \newcommand\xdashfrom\xdashleftarrow
+\newcommand\dashtoo{\xdashto{\phantom\too}} % This is silly and not even the right length (it's slightly too long)
 
 \newcommand{\cofib}{\rightarrowtail}
 \newcommand{\toto}{\rightrightarrows}
 \newcommand{\xtoto}[2][]{\overset{#2}{\underset{#1}\toto}}
 \newcommand{\fromfrom}{\leftleftarrows}
 \newcommand{\tofrom}{\rightleftarrows}
+\newcommand{\xtofrom}[2][]{\overset{#2}{\underset{#1}\tofrom}}
 \newcommand{\fromto}{\leftrightarrows}
 % https://tex.stackexchange.com/questions/195025/how-to-get-the-opposite-direction-of-rightsquigarrow
 \makeatletter
@@ -1007,6 +1121,8 @@
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator*{\argmin}{\arg\min}
 \DeclareMathOperator*{\argmax}{\arg\max}
+\newcommand\colonequals\coloneqq
+\newcommand\equalscolon\eqqcolon
 
 
 %% Text
@@ -1040,6 +1156,9 @@
 \newcommand{\texists}{\,\text{ exists }\,}
 \newcommand{\tsuchthat}{\,\text{ such that }\,}
 \newcommand{\tandso}{\,\text{ and so }\,}
+\newcommand{\tformany}{\,\text{ for many }\,}
+\newcommand{\tthat}{\,\text{ that }\,}
+\newcommand{\tandsothat}{\,\text{ and so that }\,}
 \renewcommand\t\text % Not sure if I want to keep this (Update: I do)
 \newcommand\ttt\texttt
 
@@ -1054,7 +1173,7 @@
 \newcommand{\errata}[1]{\todo[color=cyan!70]{Errata: #1}}
 
 %% Index Stuff
-\newcommand{\emphasize}[1]{\textbf{#1}}
+\newcommand\emphasize[1]{{\color{violet}{\texttt{#1}}}} % Used to just be \textbf
 \newcommand{\important}[1]{\textit{#1}}
 \newcommand\noteworthy\important
 \newcommand{\Index}[1]{#1\index{#1}}
@@ -1141,12 +1260,36 @@
 	{\endinnercustomgeneric}
 }
 
+% https://tex.stackexchange.com/questions/279058/check-what-kind-of-document-class-is-used
+\makeatletter
+\@ifclassloaded{amsart}{% true branch
+}{%
+    %% hacky MSC and keywords in non-amsart class.
+    % https://tex.stackexchange.com/questions/23745/keywords-and-msc-classification-in-latex-article-class?rq=1
+    \@ifundefined{subjclass}{
+    \newcommand{\subjclass}[2][1991]{%
+      \let\@oldtitle\@title%
+      \gdef\@title{\@oldtitle\footnotetext{#1 \emph{Mathematics subject classification.} #2}}%
+    }
+    }{}
+    \@ifundefined{keywords}{
+    \newcommand{\keywords}[1]{%
+      \let\@@oldtitle\@title%
+      \gdef\@title{\@@oldtitle\footnotetext{\emph{Key words and phrases.} #1.}}%
+    }
+    }{}
+}
+\makeatother
+
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
+\newtheorem{thma}{Theorem}
 \newtheorem{lemma}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem{cora}[thma]{Corollary}
 \newtheorem{conject}[thm]{Conjecture}
 \renewtheorem{conj}[thm]{Conjecture}
+\newtheorem{conja}[thma]{Conjecture}
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{heur}[thm]{Heuristic}
 \newtheorem{qn}[thm]{Question}
@@ -1160,6 +1303,8 @@
 \newcustomtheorem{Exc}{Theoretical Exercise}
 
 \renewcommand\thecexc{\Alph{cexc}}
+\renewcommand\thethma{\Alph{thma}}
+\renewcommand\thecora{\Alph{cora}}
 
 \theoremstyle{definition}
 \newtheorem{defninner}[thm]{Definition}
@@ -1169,8 +1314,10 @@
 \newtheorem{san}[thm]{Sanity Check}
 \newtheorem{recinner}[thm]{Recall}
 \newtheorem{set}[thm]{Setup}
+\newtheorem{exinner}[thm]{Example}
+\newtheorem{reminner}[thm]{Remark}
 \newtheorem*{fact}{Fact}
-\newtheorem*{exinner}{Example}
+\newtheorem*{exampleinner}{Example}
 \newtheorem*{assump}{Assumption}
 \newtheorem*{simpassump}{Simplifying Assumption}
 \newtheorem*{intuition}{Intuition}
@@ -1180,17 +1327,17 @@
 \newtheorem*{slogan}{Slogan}
 \newtheorem*{ansinner}{Answer}
 \newtheorem*{resp}{Response}
-\newtheorem*{hist}{History}
+\newtheorem*{histinner}{History}
 \newtheorem*{appl}{Application}
 \newtheorem*{imrem}{Important Remark}
 \newtheorem*{conf}{Confusion}
 \newtheorem*{uconf}{Unimportant Confusion}
 \newtheorem*{upshot}{Upshot}
+\newtheorem*{conv}{Convention}
 
 \theoremstyle{remark}
-\newtheorem{reminner}[thm]{Remark}
 \newtheorem{urem}[thm]{Unimportant Remark}
-\newtheorem{construct}[thm]{Construction}
+\newtheorem{constructinner}[thm]{Construction}
 \newtheorem{obs}[thm]{Observation}
 \newtheorem{pic}[thm]{Picture}
 \newtheorem{note}{Note}
@@ -1201,10 +1348,25 @@
 \newtheorem*{descrip}{Description}
 \newtheorem*{mot}{Motivation}
 \newtheorem*{goal}{Goal}
-\newtheorem*{conv}{Convention}
 \newtheorem*{plan}{Plan}
 \newtheorem*{comp}{Computation}
 \newtheorem*{idea}{Idea}
+
+%% cref doesn't automatically deduce plural versions (see section 8.1.3 of https://ctan.math.illinois.edu/macros/latex/contrib/cleveref/cleveref.pdf)
+\crefname{thm}{Theorem}{Theorems}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{prob}{Problem}{Problems}
+\crefname{exinner}{Example}{Examples}
+\crefname{reminner}{Remark}{Remarks}
+\crefname{ansinner}{Answer}{Answers}
+\crefname{warninner}{Warning}{Warnings}
+\crefname{nonexinner}{Non-example}{Non-examples}
+\crefname{recinner}{Recall}{Recall}
+\crefname{defninner}{Definition}{Definitions}
+\crefname{histinner}{History}{History}
+\crefname{constructinner}{Construction}{Constructions}
 
 %% https://tex.stackexchange.com/questions/16453/denoting-the-end-of-example-remark
 \newcommand\exsymbol{$\triangle$}
@@ -1215,14 +1377,19 @@
 \newcommand\nonexsymbol{$\triangledown$}
 \newcommand\recsymbol{$\odot$}
 \newcommand\defnsymbol{$\diamond$}
+\newcommand\histsymbol{$\ominus$}
+\newcommand\constructsymbol{$\octagon$}
 
 \newenvironment{ex}[1][]{\begin{exinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\exsymbol}{\popQED\end{exinner}}
+\newenvironment{example}[1][]{\begin{exampleinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\exsymbol}{\popQED\end{exampleinner}}
 \newenvironment{rem}[1][]{\begin{reminner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\remsymbol}{\popQED\end{reminner}}
 \newenvironment{ans}[1][]{\begin{ansinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\anssymbol}{\popQED\end{ansinner}}
 \newenvironment{warn}[1][]{\begin{warninner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\warnsymbol}{\popQED\end{warninner}}
 \newenvironment{nonex}[1][]{\begin{nonexinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\nonexsymbol}{\popQED\end{nonexinner}}
 \newenvironment{rec}[1][]{\begin{recinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\recsymbol}{\popQED\end{recinner}}
 \newenvironment{defn}[1][]{\begin{defninner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\defnsymbol}{\popQED\end{defninner}}
+\newenvironment{hist}[1][]{\begin{histinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\histsymbol}{\popQED\end{histinner}}
+\newenvironment{construct}[1][]{\begin{constructinner}[#1]\pushQED{\qed}\renewcommand\qedsymbol\constructsymbol}{\popQED\end{constructinner}}
 
 
 %https://tex.stackexchange.com/questions/291235/modifying-an-existing-environment-but-keeping-the-name

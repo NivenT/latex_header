@@ -1,8 +1,8 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
 \input{header.tex}
 
 \geometry{margin=1.1in}
+\singlespacing
 %\setlength{\parindent}{0pt}
 
 \numberwithin{thm}{section}
@@ -13,8 +13,11 @@
 \author{Niven Achenjang}
 
 \begin{document}
-\section{Custom Tex Cheat Sheet}
 
+\tableofcontents
+
+\section{Custom Tex Cheat Sheet}
+This is just a random sampling of stuff. There's much more defined in \texttt{header.tex}, and it's hard to keep track of it all.
 \begin{itemize}
     \item Fonts
     \begin{itemize}
@@ -34,6 +37,8 @@
         \item Many common diagram shapes have commands associated with them (with the arguments generally ordered top to bottom, left to right), see e.g. the code producing these
         $$\commsquare AfBghCiD\tand\barecommsquare ABCD\tand\mapover XfYpqS$$
         $$\compdiag AfBgC{g\circ f}\tand\mapwithsect E\pi X\sigma\tand\correspondence ZpqXY\tand\mapdown Xf{\t{flat}}Y$$
+        \item There's even a command for homomorphisms between short exact sequences. The below diagram was produced using \verb+\homses{A}{f}{B}{g}{C}{\alpha}{\beta}{\gamma}{A'}{f'}{B'}{g'}{C'}+
+        $$\homses AfBgC\alpha\beta\gamma{A'}{f'}{B'}{g'}{C'}$$
     \end{itemize}
     \item Symbols and functions
     \begin{itemize}
@@ -50,7 +55,7 @@
     \end{itemize}
     \item Index and marginal comments
     \begin{itemize}
-        \item Add marginal comments with \verb+\thought,\question,\answer,\dolater,\remember+ (by default, I use \verb+\thought+). A list of these is at the end of the document
+        \item Add marginal comments with \verb+\thought,\question,\answer,\dolater,\remember+ (by default, I use \verb+\thought+). A list of these is at the end of the document\thought{Test}
         \item There's an index at the end. To add something to it, use \verb+\define{blah}+, e.g. \define{ignore this} is now in the index
     \end{itemize}
     \item Others
@@ -71,11 +76,13 @@
 
 $$\twocommsquare AfBghC{f'}D\alpha\tand\baretwocommsquare XYZW\tand\baretwocommsquare{G\by X}XX{[X/G]}\tand\twocommsquare{\ul\Isom_{\meX(S)}(a,b)}{}S{}{(a,b)}\meX\Delta{\meX\by\meX}{}$$
 
-$$\pullback {X\by_ZY}XfYgZ\tand\pushout {U\cap V}fUgV{U\cup V}\tand\liftsquare AfBghCkD\alpha$$
+$$\pullback {X\by_ZY}XfYgZ\tand\pushout {U\cap V}iUjV{U\cup V}\tand\liftsquare AfBghCkD\alpha$$
 
 $$\galoisdiamond{KL}GHKLHGF$$
 
 $$\mapover XfYpqS\tand\compdiag AfBgC{g\circ f}\tand\mapwithsect E\pi X\sigma\tand\correspondence ZpqXY\tand\mapdown Xf{\t{flat}}Y$$
+
+\[\topcorner xfygz\tand\botcorner xfygz\tand\conediag Fghcfd\tand\midtwosimplex 0ab1c2\tand\frontthreesimplex0{g\circ f}f{h\circ g\circ f}1g{h\circ g}2h3\]
 
 $\mcA\mf B\msC\meD\mbf E$
 
@@ -104,7 +111,7 @@ $$\begin{ytableau}
     8
 \end{ytableau}\tand\ydiagram{4,3,1,1}$$
 
-$$\mat1234\tand\Mat123456789\tand\MAT0123456789ABCDEF\tand\Matt123456789\tand\matt1234$$
+$$\mat1234\tand\Mat123456789\tand\MAT0123456789ABCDEF\tand\Matrix ABCDEFGHIJKLMNOPQRSTUVWXY\tand\Matt123456789\tand\matt1234$$
 
 $$\prescript123$$
 
@@ -113,15 +120,18 @@ $$k\dsq t,k\dsq{t^{1/p^\infty}}\tand k\dparens t,k\dparens{t^{1/p^\infty}}$$
 
 $G^\Frob$
 
-\begin{ex}
+$X\coloneqq Y\eqqcolon Z\colonequals W\equalscolon V$
+
+Testing nested ending symbols
+\begin{ex}\label{ex}
     nested test
-    \begin{rem}[stuff]
+    \begin{rem}[stuff]\label{rem}
         test again
         \begin{proof}[Proof Test]
             begin proof
             \begin{ans}[Parenthetical]
                 begin ans.
-                \begin{warn}[I probably didn't need to do this on all of them]
+                \begin{warn}[I probably didn't need to do this on all of them]\label{warn}
                     begin warn
                     \begin{nonex}
                         begin nonex
@@ -129,7 +139,19 @@ $G^\Frob$
                             begin defn
                             \begin{rec}[This is a bit excessive maybe]
                                 begin rec
-                                
+                                \begin{hist}
+                                    begin hist
+                                    \begin{example}
+                                        begin example
+                                        \begin{construct}
+                                            begin construct
+
+                                            end construct
+                                        \end{construct}
+                                        end example
+                                    \end{example}
+                                    end hist
+                                \end{hist}
                                 end rec
                             \end{rec}
                             end defn
@@ -144,12 +166,34 @@ $G^\Frob$
         \end{proof}
         end remark
     \end{rem}
-    end example
+    end ex
 \end{ex}
-\begin{ex}
+\begin{ex}\label{ex:qed}
     \begin{align*}
-        \bs\t{qedhere test} &\qedhere
+        \t{\textbackslash qedhere test} &\qedhere
     \end{align*}
 \end{ex}
+\begin{equation}\label{eqn}
+    \sum_{n=1}^\infty \frac1{n^{-1}} = -\frac1{12}
+\end{equation}
+
+Let's test intra-document references and urls and whatnot: 
+
+\begin{itemize}
+    \item \textbackslash cref: \cref{ex} and \cref{rem} and \cref{warn} and \cref{eqn} and \cref{ex,ex:qed}.
+    \item \textbackslash ref: \ref{ex} and \ref{rem} and \ref{warn} and \ref{eqn}. 
+    \item \textbackslash myref: \myref{ex} and \myref{rem} and \myref{warn} and \myref{eqn}.
+    \item \textbackslash autoref: \autoref{ex} and \autoref{rem} and \autoref{warn} and \autoref{eqn}.
+    \item \cite[Test]{conrad-min}
+    \item \url{https://test.com}
+\end{itemize}
+
+\bibliographystyle{alpha}
+\bibliography{citations}
+
+\newpage
+\section{List of Marginal Comments}
+\listoftodos[]
+\printindex
 
 \end{document}
